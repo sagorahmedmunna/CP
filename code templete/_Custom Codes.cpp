@@ -14,9 +14,13 @@ bool custom(pair<int, int>& a, pair<int, int>& b) {
 	return a.second < b.second;
 }
 
+// greater functions
 priority_queue<int, vector<int>, greater<int>>
 set<int, greater<int>>
 map<int, int, greater<int>>
+
+// fill with elements
+fill(v.begin(), v.end(), -1);
 
 // string to number
 stoi(num);
