@@ -1,0 +1,8 @@
+1. Update the Ubuntu package repository using the following command:
+sudo apt update
+
+2. Install the build-essential package:
+sudo apt install build-essential
+
+3. Install Visual Studio Code with Snap:
+sudo snap install --classic code
