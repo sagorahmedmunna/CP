@@ -1,36 +1,30 @@
-#include <bits/stdc++.h>
-using namespace std;
-
-const int N = 1e5 + 10;
-int a[N], tree[N * 4];
-
-void build(int node, int st, int en) {
-    if (st == en) {
-        tree[node] = a[st]; return;
+void build(int node, int s, int e) {
+    if (s == e) {
+        tree[node] = a[s]; return;
     }
-    int mid = (st + en) / 2;
-    build(node * 2, st, mid);
-    build(node * 2 + 1, mid + 1, en);
+    int m = (s + e) / 2;
+    build(node * 2, s, m);
+    build(node * 2 + 1, m + 1, e);
     tree[node] = tree[node * 2] + tree[node * 2 + 1];
 }
-
-long long query(int node, int st, int en, int l, int r) {
-    if (st > r || en < l) return 0LL;
-    if (st >= l && en <= r) return tree[node];
-    int mid = (st + en) / 2;
-    long long q1 = query(node * 2, st, mid, l, r);
-    long long q2 = query(node * 2 + 1, mid + 1, en, l, r);
-    return q1 + q2;
-}
-
-void update(int node, int st, int en, int idx, int val) {
-    if (st == en) {
+ 
+void update(int node, int s, int e, int idx, int val) {
+    if (s == e) {
         tree[node] = val;
         a[idx] = val;
         return;
     }
-    int mid = (st + en) / 2;
-    if (idx <= mid) update(node * 2, st, mid, idx, val);
-    else update(node * 2 + 1, mid + 1, en, idx, val);
+    int m = (s + e) / 2;
+    if (idx <= m) update(node * 2, s, m, idx, val);
+    else update(node * 2 + 1, m + 1, e, idx, val);
     tree[node] = tree[node * 2] + tree[node * 2 + 1];
+}
+ 
+long long query(int node, int s, int e, int l, int r) {
+    if (s > r || e < l) return 0LL;
+    if (s >= l && e <= r) return tree[node];
+    int m = (s + e) / 2;
+    long long q1 = query(node * 2, s, m, l, r);
+    long long q2 = query(node * 2 + 1, m + 1, e, l, r);
+    return q1 + q2;
 }
