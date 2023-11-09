@@ -1,3 +1,7 @@
+const int N = 2e5 + 9;
+int tree[N * 4], a[N];
+int n;
+
 void build(int node, int s, int e) {
     if (s == e) {
         tree[node] = a[s]; return;
