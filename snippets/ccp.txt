@@ -2,7 +2,7 @@
 	"": {
 		"prefix": "ccp",
 		"body": [
-		  "//@sagorahmedmunna (SAMee)",
+		  "// @sagorahmedmunna (SAMee)",
 		  "",
 		  "#include <bits/stdc++.h>",
 		  "using namespace std;",
