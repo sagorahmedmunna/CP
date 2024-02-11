@@ -2,20 +2,20 @@
 	"": {
 		"prefix": "cp",
 		"body": [
-		  "// @sagorahmedmunna (SAMee)",
+		  "// @sagorahmedmunna",
 		  "",
 		  "#include <bits/stdc++.h>",
 		  "using namespace std;",
 		  "",
 		  "void test() {",
-		  "    ",
+		  "  ",
 		  "}",
 		  "",
 		  "int main() {",
-		  "    ios_base::sync_with_stdio(0), cin.tie(0);",
-		  "    int t = 1; cin >> t;",
-		  "    for (int i = 1; i <= t; i++) test();",
-		  "    return 0;",
+		  "  ios_base::sync_with_stdio(0), cin.tie(0);",
+		  "  int t = 1; cin >> t;",
+		  "  for (int i = 1; i <= t; i++) test();",
+		  "  return 0;",
 		  "}"
 		],
 		"description": ""
