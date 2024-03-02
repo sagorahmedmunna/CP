@@ -1,34 +1,55 @@
-const int N = 2e5 + 9;
-int tree[N * 4], a[N];
-int n;
+#include <bits/stdc++.h>
+using namespace std;
 
-void build(int node, int s, int e) {
-    if (s == e) {
-        tree[node] = a[s]; return;
-    }
-    int m = (s + e) / 2;
-    build(node * 2, s, m);
-    build(node * 2 + 1, m + 1, e);
-    tree[node] = tree[node * 2] + tree[node * 2 + 1];
+const int N = 2e5 + 9;
+long a[N], st[4 * N];
+
+void build(int u, int s, int e) {
+  if (s == e) {
+    st[u] = a[s];
+    return;
+  }
+  int v = 2 * u, w = 2 * u + 1, m = (s + e) / 2;
+  build(v, s, m);
+  build(w, m + 1, e);
+  st[u] = st[v] + st[w];
 }
- 
-void update(int node, int s, int e, int idx, int val) {
-    if (s == e) {
-        tree[node] = val;
-        a[idx] = val;
-        return;
-    }
-    int m = (s + e) / 2;
-    if (idx <= m) update(node * 2, s, m, idx, val);
-    else update(node * 2 + 1, m + 1, e, idx, val);
-    tree[node] = tree[node * 2] + tree[node * 2 + 1];
+
+void update(int u, int s, int e, int k, int val) {
+  if (s == e) {
+    a[s] = val;
+    st[u] = a[s];
+    return;
+  }
+  int v = 2 * u, w = 2 * u + 1, m = (s + e) / 2;
+  if (k <= m) update(v, s, m, k, val);
+  else update(w, m + 1, e, k, val);
+  st[u] = st[v] + st[w];
 }
- 
-long long query(int node, int s, int e, int l, int r) {
-    if (s > r || e < l) return 0LL;
-    if (s >= l && e <= r) return tree[node];
-    int m = (s + e) / 2;
-    long long q1 = query(node * 2, s, m, l, r);
-    long long q2 = query(node * 2 + 1, m + 1, e, l, r);
-    return q1 + q2;
+
+long long query(int u, int s, int e, int l, int r) {
+  if (e < l || r < s) return 0;
+  if (l <= s && e <= r) return st[u];
+  int v = 2 * u, w = 2 * u + 1, m = (s + e) / 2;
+  long long lmin = query(v, s, m, l, r);
+  long long rmin = query(w, m + 1, e, l, r);
+  return lmin + rmin;
+}
+
+int main() {
+	int n, q; cin >> n >> q;
+	for (int i = 1; i <= n; i++) cin >> a[i];
+
+	build(1, 1, n);
+
+	while (q--) {
+    int type; cin >> type;
+    if (type == 2) {
+      int l, r; cin >> l >> r;
+      cout << query(1, 1, n, l, r) << '\n';
+    } else {
+      int k, u; cin >> k >> u;
+      update(1, 1, n, k, u);
+    }
+	}
 }
