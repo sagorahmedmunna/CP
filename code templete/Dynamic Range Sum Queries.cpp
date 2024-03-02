@@ -17,8 +17,7 @@ void build(int u, int s, int e) {
 
 void update(int u, int s, int e, int k, int val) {
   if (s == e) {
-    a[s] = val;
-    st[u] = a[s];
+    st[u] = a[s] = val;
     return;
   }
   int v = 2 * u, w = 2 * u + 1, m = (s + e) / 2;
@@ -31,9 +30,9 @@ long long query(int u, int s, int e, int l, int r) {
   if (e < l || r < s) return 0;
   if (l <= s && e <= r) return st[u];
   int v = 2 * u, w = 2 * u + 1, m = (s + e) / 2;
-  long long lmin = query(v, s, m, l, r);
-  long long rmin = query(w, m + 1, e, l, r);
-  return lmin + rmin;
+  long long lsum = query(v, s, m, l, r);
+  long long rsum = query(w, m + 1, e, l, r);
+  return lsum + rsum;
 }
 
 int main() {
