@@ -20,10 +20,10 @@ item merge(item l, item r) {
 }
 
 item make_item(int val) {
-    item res;
-    res.sum = val;
-    res.pref = res.suff = res.ans = max(0, val);
-    return res;
+  item res;
+  res.sum = val;
+  res.pref = res.suff = res.ans = max(0, val);
+  return res;
 }
 
 void build(int u, int s, int e) {
