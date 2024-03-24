@@ -2,7 +2,7 @@
 using namespace std;
 
 const int N = 2e5 + 9;
-long a[N], st[4 * N];
+long long a[N], st[4 * N];
 
 void build(int u, int s, int e) {
   if (s == e) {
