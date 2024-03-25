@@ -1,4 +1,5 @@
-
+freopen("input.in", "r", stdin);
+freopen("output.in", "w", stdout);
 
 struct item {
     int a, b;
@@ -7,8 +8,6 @@ bool cmp(item& a, item& b) {
     if(a.a != b.a) return a.a < b.a;
 	return a.b > b.b;
 }
-
-
 bool custom(pair<int, int>& a, pair<int, int>& b) {
     if(a.first != b.first) return a.first > b.first;
 	return a.second < b.second;
@@ -46,13 +45,6 @@ n | (1 << i)
 n & ~(1 << i) 
 // toggle or inverse ith bit
 n ^ (1 << i)
-
-// sieve
-for (int i = 2; i <= N; i++) {
-    if (vis[i]) continue;
-    primes.push_back(i);
-    for (int j = i * 2; j <= N; j += i) vis[j] = 1;
-}
 
 ---------------------------------------------------------
 // unordered map custom hash
