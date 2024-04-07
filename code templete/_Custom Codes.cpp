@@ -46,11 +46,17 @@ n & ~(1 << i)
 // toggle or inverse ith bit
 n ^ (1 << i)
 
+// a point inside cricle
+// x1, y1 = point of circle
+// r = radius of circle
+// x2, y2 = target point
+bool isInside(int x1, int y1, int x2, int y2, int r) {
+  return ((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1)) <= r * r;
+}
+
 ---------------------------------------------------------
 // unordered map custom hash
 	
-unordered_map<int, int, custom_hash> ump;
-
 struct custom_hash {
     static uint64_t splitmix64(uint64_t x) {
         x += 0x9e3779b97f4a7c15;
@@ -64,6 +70,7 @@ struct custom_hash {
         return splitmix64(x + FIXED_RANDOM);
     }
 };
+unordered_map<int, int, custom_hash> ump;
 
 ---------------------------------------------------------
 // ordered set
