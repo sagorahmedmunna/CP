@@ -7,6 +7,9 @@ struct SegTree {
   #change
   struct node {
     long long sum, pref, suff, ans;
+    node() {
+      sum = pref = suff = ans = 0;
+    }
   };
  
   int size = 1;
@@ -66,8 +69,7 @@ struct SegTree {
  
   node query(int u, int s, int e, int l, int r) {
     if (e < l || r < s) {
-      node mx = make_node(0);
-      return mx;
+      return node();
     }
     if (l <= s && e <= r) return st[u];
     int v = 2 * u, w = 2 * u + 1, m = (s + e) / 2;
