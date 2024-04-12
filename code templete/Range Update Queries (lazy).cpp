@@ -38,7 +38,7 @@ struct SegLazy {
       st[v].lazy_add += st[u].lazy_add;
       st[w].lazy_add += st[u].lazy_add;
     }
-    st[u].sum += st[u].lazy_add;
+    st[u].sum += (r - l + 1) * st[u].lazy_add;
     st[u].lazy_add = 0;
   }
  
