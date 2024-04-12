@@ -1,6 +1,9 @@
 freopen("input.in", "r", stdin);
 freopen("output.in", "w", stdout);
 
+// ignore white space
+cin.ignore(); or cin >> ws;
+
 struct item {
     int a, b;
 };
