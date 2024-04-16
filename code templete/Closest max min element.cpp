@@ -1,3 +1,5 @@
+// closest max min element from index l to r
+
 pair<vector<int>, vector<int>> closest_min_element(vector<int> &a) {
   int n = a.size();
   vector<int> l(n), r(n);
