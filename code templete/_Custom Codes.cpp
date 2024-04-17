@@ -16,6 +16,15 @@ bool custom(pair<int, int>& a, pair<int, int>& b) {
 	return a.second < b.second;
 }
 
+// custom compare in set
+struct cmp{
+  bool operator() (const pair<int, int>& a, const pair<int, int>& b) const {
+    if (a.first != b.first) return a.first > b.first;
+    return a.second < b.second;
+  }
+};
+set<pair<int, int>, cmp> a;
+
 // greater functions
 priority_queue<int, vector<int>, greater<int>>
 set<int, greater<int>>
