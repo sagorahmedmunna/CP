@@ -8,3 +8,10 @@ vector<int> get_pi(string& s) {
   }
   return pi;
 }
+
+// count the number of p occurs in s
+string s, p;
+s = p + "#" + s;
+vector<int> pi = get_pi(s);
+int ans = 0;
+for (auto& i : pi) ans += (i == p.size());
