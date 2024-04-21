@@ -4,6 +4,10 @@ freopen("output.in", "w", stdout);
 // ignore white space
 cin.ignore(); or cin >> ws;
 
+// tuple
+tuple<int, int, int> tup = {1, 2, 3};
+int first = get<0>(tup);
+
 struct item {
     int a, b;
 };
