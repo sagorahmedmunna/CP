@@ -1,5 +1,6 @@
 freopen("input.in", "r", stdin);
 freopen("output.in", "w", stdout);
+ios_base::sync_with_stdio(0), cin.tie(0);
 
 // ignore white space
 cin.ignore(); or cin >> ws;
@@ -9,23 +10,23 @@ tuple<int, int, int> tup = {1, 2, 3};
 int first = get<0>(tup);
 
 struct item {
-    int a, b;
+	int a, b;
 };
 bool cmp(item& a, item& b) {
-    if(a.a != b.a) return a.a < b.a;
+	if(a.a != b.a) return a.a < b.a;
 	return a.b > b.b;
 }
 bool custom(pair<int, int>& a, pair<int, int>& b) {
-    if(a.first != b.first) return a.first > b.first;
+	if(a.first != b.first) return a.first > b.first;
 	return a.second < b.second;
 }
 
 // custom compare in set
 struct cmp{
-  bool operator() (const pair<int, int>& a, const pair<int, int>& b) const {
-    if (a.first != b.first) return a.first > b.first;
-    return a.second < b.second;
-  }
+	bool operator() (const pair<int, int>& a, const pair<int, int>& b) const {
+		if (a.first != b.first) return a.first > b.first;
+		return a.second < b.second;
+	}
 };
 set<pair<int, int>, cmp> a;
 
@@ -67,24 +68,24 @@ n ^ (1 << i)
 // r = radius of circle
 // x2, y2 = target point
 bool isInside(int x1, int y1, int x2, int y2, int r) {
-  return ((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1)) <= r * r;
+	return ((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1)) <= r * r;
 }
 
 ---------------------------------------------------------
 // unordered map custom hash
 	
 struct custom_hash {
-    static uint64_t splitmix64(uint64_t x) {
-        x += 0x9e3779b97f4a7c15;
-        x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;
-        x = (x ^ (x >> 27)) * 0x94d049bb133111eb;
-        return x ^ (x >> 31);
-    }
+	static uint64_t splitmix64(uint64_t x) {
+		x += 0x9e3779b97f4a7c15;
+		x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;
+		x = (x ^ (x >> 27)) * 0x94d049bb133111eb;
+		return x ^ (x >> 31);
+	}
 
-    size_t operator()(uint64_t x) const {
-        static const uint64_t FIXED_RANDOM = chrono::steady_clock::now().time_since_epoch().count();
-        return splitmix64(x + FIXED_RANDOM);
-    }
+	size_t operator()(uint64_t x) const {
+		static const uint64_t FIXED_RANDOM = chrono::steady_clock::now().time_since_epoch().count();
+		return splitmix64(x + FIXED_RANDOM);
+	}
 };
 unordered_map<int, int, custom_hash> ump;
 
