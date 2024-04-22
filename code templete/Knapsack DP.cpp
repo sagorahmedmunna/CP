@@ -34,7 +34,7 @@ vector<pair<int, int>> a(n);
 for (auto& [weight, val] : a) cin >> weight >> val;
 vector<int> dp(total_weight + 1);
 for (int i = 0; i < n; i++) {
-  for (int sum = s; sum >= a[i].first; sum--) {
+  for (int sum = total_weight; sum >= a[i].first; sum--) {
     dp[sum] = max(dp[sum], dp[sum - a[i].first] + a[i].second);
   }
 }
