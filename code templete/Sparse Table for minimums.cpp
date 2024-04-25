@@ -7,9 +7,9 @@ int a[N];
 int n;
 
 void sparse() {
-  for (int i = 0; i < n; i++) table[i][0] = a[i];
+  for (int i = 1; i <= n; i++) table[i][0] = a[i]; // i = 0; i < n
   for (int j = 1; j < LOG; j++) {
-    for (int i = 0; i + (1 << j) - 1 < n; i++) {
+    for (int i = 0; i + (1 << j) - 1 <= n; i++) { // i + (1 << j) - 1 < n
       table[i][j] = min(table[i][j - 1], table[i + (1 << (j - 1))][j - 1]);
     }
   }
