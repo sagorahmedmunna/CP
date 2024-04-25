@@ -1,15 +1,7 @@
-{
-	"": {
-		"prefix": "hello",
-		"body": [
-			"#include <iostream>",
-			"using namespace std;",
-			"",
-			"int main() {",
-			"  ",
-			"  return 0;",
-			"}"
-		],
-		"description": ""
-	}
+#include <iostream>
+using namespace std;
+
+int main() {
+  
+  return 0;
 }
