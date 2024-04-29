@@ -29,8 +29,8 @@ for (auto& [p, c] : factors[num]) {
 
 
 // (a * b) % p   (Binary Multiplication)
-long long BinMul(long long a, long long b, long long mod) {
-  long long ans = 0;
+int BinMul(long long a, long long b, int mod) {
+  int ans = 0;
   while (b) {
     if (b & 1) ans = (ans + a) % mod;
     a = (a + a) % mod;
@@ -39,11 +39,11 @@ long long BinMul(long long a, long long b, long long mod) {
   return ans;
 }
 // (a ^ b) % p   (Binary Exponentiation)
-long long BinExp(long long a, long long b, long long mod) {
-  long long ans = 1;
+int BinExp(long long a, long long b, int mod) {
+  int ans = 1;
   while (b) {
-    if (b & 1) ans = (BinMul(ans, a, mod)) % mod;
-    a = (BinMul(a, a, mod)) % mod;
+    if (b & 1) ans = (ans * a) % mod;
+    a = (a * a) % mod;
     b >>= 1;
   }
   return ans;
