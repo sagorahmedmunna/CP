@@ -33,3 +33,15 @@ int main() {
   }
   return 0;
 }
+
+// iterative
+vector<vector<int>> st = {{}};
+for (int i = 1; i <= n; i++) {
+  vector<vector<int>> temp = st;
+  for (auto& v : temp) v.push_back(i);
+  for (auto& v : temp) st.push_back(v);
+}
+for (auto& v : st) {
+  for (auto& i : v) cout << i << ' ';
+  cout << '\n';
+}
