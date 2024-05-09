@@ -53,6 +53,32 @@ BinMul(a, BinExp(b, p - 2, p), p);
 // (a ^ (b ^ c)) % p
 BinExp(a, BinExp(b, c, p - 1), p);
 
+// NCR
+struct NCR{
+  vector<long long> fact, inv;
+  int sz;
+  void init(int n) {
+    sz = n;
+    fact.assign(sz, 0);
+    inv.assign(sz, 0);
+    fact[0] = 1;
+    for(int i = 1; i < sz; i++){
+      fact[i] = fact[i - 1] * i;
+      fact[i] %= mod;
+    }
+    inv[n - 1] = BinExp(fact[n - 1], mod - 2);
+    for(int i = sz - 2; i >= 0; i--){
+      inv[i] = inv[i + 1] * (i + 1);
+      inv[i] %= mod;
+    }
+  }
+  int ncr(int n, int r){
+    if(n == r)return 1;
+    if(n < r)return 0;
+    return ((fact[n] * inv[r]) % mod * inv[n - r]) % mod;
+  }
+};
+
 // phi of single integer
 int n = 10;
 long long num = n;
