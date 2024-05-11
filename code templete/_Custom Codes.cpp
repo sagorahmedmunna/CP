@@ -2,6 +2,10 @@ freopen("input.in", "r", stdin);
 freopen("output.in", "w", stdout);
 ios_base::sync_with_stdio(0), cin.tie(0);
 
+// pragma
+#pragma GCC optimize("O3,unroll-loops")
+#pragma GCC target("avx2,bmi,bmi2,lzcnt,popcnt")
+
 // ignore white space
 cin.ignore(); or cin >> ws;
 
