@@ -16,8 +16,10 @@ void dijkstra(int source) {
     if (vis[u]) continue;
     vis[u] = 1;
     for (auto& [v, w_v] : a[u]) {
-      dis[v] = min(w_u + w_v, dis[v]);
-      pq.push({dis[v], v});
+      if (w_u + w_v < dis[v]) {
+        dis[v] = w_u + w_v;
+        pq.push({dis[v], v});
+      }
     }
   }
 }
