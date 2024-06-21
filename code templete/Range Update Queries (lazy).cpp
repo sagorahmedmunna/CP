@@ -33,6 +33,7 @@ struct SegLazy {
   }
  
   void push(int u, int l, int r) {
+    if (st[u].lazy_add == 0) return;
     if (l != r) {
       int v = 2 * u, w = 2 * u + 1;
       st[v].lazy_add += st[u].lazy_add;
