@@ -1,5 +1,5 @@
 const int N = 2e5 + 10, K = 20;
-vector<int> adj[N], tin(N), tout(N), dep(N);
+vector<int> adj[N], tin(N), tout(N), depth(N);
 int t, par[N][K];
 
 void dfs(int u, int p) {
@@ -10,7 +10,7 @@ void dfs(int u, int p) {
   }
   for (auto& v : adj[u]) {
     if (v == p) continue;
-    dep[v] = dep[u] + 1;
+    depth[v] = depth[u] + 1;
     dfs(v, u);
   }
   tout[u] = t++;
@@ -31,5 +31,24 @@ int lca(int u, int v) {
 }
 
 int dis(int u, int v) {
-  return dep[u] + dep[v] - 2 * dep[lca(u, v)];
+  return depth[u] + depth[v] - 2 * depth[lca(u, v)];
+}
+
+// make u and v to same depth then lift
+int lca(int u, int v) {
+  if (depth[u] < depth[v]) swap(u, v);
+  int k = depth[u] - depth[v];
+  for (int i = K - 1; i >= 0; i--) {
+    if (k & (1 << i)) {
+      u = par[u][i];
+    }
+  }
+  if (u == v) return u;
+  for (int i = K - 1; i >= 0; i--) {
+    if (par[u][i] != par[v][i]) {
+      u = par[u][i];
+      v = par[v][i];
+    }
+  }
+  return par[u][0];
 }
