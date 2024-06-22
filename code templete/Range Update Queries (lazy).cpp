@@ -66,6 +66,8 @@ struct SegLazy {
       return;
     }
     int v = 2 * u, w = 2 * u + 1, m = (s + e) / 2;
+    push(v, s, m);
+    push(w, m + 1, e);
     update(v, s, m, l, r, val);
     update(w, m + 1, e, l, r, val);
     st[u] = merge(st[v], st[w]);
@@ -80,6 +82,8 @@ struct SegLazy {
       node mx = make_node(0);
       return mx;
     }
+    push(v, s, m);
+    push(w, m + 1, e);
     if (l <= s && e <= r) return st[u];
     int v = 2 * u, w = 2 * u + 1, m = (s + e) / 2;
     node lsum = query(v, s, m, l, r);
