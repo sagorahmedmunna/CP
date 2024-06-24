@@ -4,21 +4,21 @@ using namespace std;
 const int N = 2e5 + 9;
 vector<int> adj[N];
 int t = 0;
-vector<int> tin(N, -1), lo(N);
+vector<int> tin(N, -1), low(N);
 vector<array<int, 2>> ab;
 
 void dfs (int u, int p) {
-  tin[u] = lo[u] = t++;
+  tin[u] = low[u] = t++;
   for (int v: adj[u]) {
     if (v != p) {
       if (tin[v] != -1) {
-        lo[u] = min(lo[u], tin[v]);
+        low[u] = min(low[u], tin[v]);
       } else {
         dfs(v, u);
-        if (tin[u] < lo[v]) {
+        if (tin[u] < low[v]) {
           ab.push_back({u, v});
         }
-        lo[u] = min(lo[u], lo[v]);
+        low[u] = min(low[u], low[v]);
       }
     }
   }
