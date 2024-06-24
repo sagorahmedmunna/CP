@@ -5,6 +5,7 @@ const int N = 2e5 + 9;
 vector<int> adj[N];
 int t = 0;
 vector<int> tin(N, -1), low(N), ap;
+
 void dfs (int u, int p) {
   tin[u] = low[u] = t++;
   int is_ap = 0, child = 0;
