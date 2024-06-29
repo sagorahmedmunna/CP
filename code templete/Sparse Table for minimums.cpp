@@ -1,21 +1,46 @@
+// https://cses.fi/problemset/task/1647/
+// Static Range Minimum Queries
 // 1 based indexing
+// for 0 basaed change i = 0, i < n
 
-const int N = 2e5 + 10;
-const int LOG = 18;
-int table[N][LOG];
-int a[N];
-int n;
+#include <bits/stdc++.h>
+using namespace std;
 
-void sparse() {
-  for (int i = 1; i <= n; i++) table[i][0] = a[i]; // i = 0; i < n
-  for (int j = 1; j < LOG; j++) {
-    for (int i = 0; i + (1 << j) - 1 <= n; i++) { // i + (1 << j) - 1 < n
-      table[i][j] = min(table[i][j - 1], table[i + (1 << (j - 1))][j - 1]);
+struct SparseTable {
+  int n = 1, LOG = 1;
+  vector<vector<int>> st;
+  void build(vector<int>& a) {
+    n = a.size();
+    while ((1 << LOG) <= n) LOG++;
+    st = vector<vector<int>> (n + 1, vector<int> (LOG));
+    for (int j = 0; j < LOG; j++) {
+      for (int i = 1; i + (1 << j) - 1 <= n; i++) {
+        if (j == 0) st[i][j] = a[i];
+        else st[i][j] = min(st[i][j - 1], st[i + (1 << (j - 1))][j - 1]);
+      }
     }
   }
-}
+  int query(int l, int r) {
+    int log = __lg(r - l + 1);
+    return min(st[l][log], st[r - (1 << log) + 1][log]);
+  }
+};
 
-int query(int l, int r) {
-  int log = __lg(r - l + 1);
-  return min(table[l][log], table[r - (1 << log) + 1][log]);
+int main() {
+  ios_base::sync_with_stdio(0), cin.tie(0);
+  
+  int n, q; cin >> n >> q;
+  vector<int> a(n + 1);
+  for (int i = 1; i <= n; i++) {
+    cin >> a[i];
+  }
+
+  SparseTable st;
+  st.build(a);
+
+  while (q--) {
+    int l, r; cin >> l >> r;
+    cout << st.query(l, r) << '\n';
+  }
+  return 0;
 }
