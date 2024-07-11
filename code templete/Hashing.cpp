@@ -44,11 +44,9 @@ void Preprocess() {
 
 struct Hashing {
   int n;
-  string s;
   vector<array<long long, 2>> hs;
-  Hashing (string t) {
-    n = t.size();
-    s = t;
+  Hashing (string& s) {
+    n = s.size();
     hs.resize(n + 1);
     for (int i = 0; i < n; i++) {
       (hs[i + 1][0] = hs[i][0] + (pw[i][0] * s[i]) % MOD[0]) %= MOD[0];
