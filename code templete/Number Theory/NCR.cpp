@@ -1,13 +1,13 @@
-const int mod = 1e9 + 7;
+const int mod = (int)1e9 + 7;
 
 int BinExp(long long a, long long b) {
-  long long ans = 1;
+  long long res = 1;
   while (b) {
-    if (b & 1) ans = (ans * a) % mod;
+    if (b & 1) res = (res * a) % mod;
     a = (a * a) % mod;
     b >>= 1;
   }
-  return ans;
+  return res;
 }
 
 struct NCR {

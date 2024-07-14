@@ -1,5 +1,5 @@
 int BinExp(long long a, long long b, int mod) {
-	long long ans = 1;
+	int ans = 1;
 	while (b) {
 		if (b & 1) ans = (ans * a) % mod;
 		a = (a * a) % mod;
