@@ -79,6 +79,12 @@ bool isInside(int x1, int y1, int x2, int y2, int r) {
 }
 
 ---------------------------------------------------------
+// gp hash table
+#include <ext/pb_ds/assoc_container.hpp>
+using namespace __gnu_pbds;
+gp_hash_table<int, int> mp;
+
+---------------------------------------------------------
 // unordered map custom hash
 	
 struct custom_hash {
