@@ -1,13 +1,14 @@
+// Range Update Queries
+// https://cses.fi/problemset/task/1651
+
 #include <bits/stdc++.h>
 using namespace std;
  
-struct SegTree {
- 
-  #change
+struct SegLazy {
   struct node {
-    long long sum, pref, suff, ans;
+    long long sum, lazy_add;
     node() {
-      sum = pref = suff = ans = 0;
+      sum = lazy_add = 0;
     }
   };
  
@@ -20,27 +21,32 @@ struct SegTree {
     st.resize(tree_size * 2);
   }
  
-  #change
   node make_node(int val) {
     node res;
     res.sum = val;
-    res.pref = res.suff = res.ans = max(0, val);
+    res.lazy_add = 0;
     return res;
   }
  
-  #change
   node merge(node l, node r) {
     node res;
     res.sum = l.sum + r.sum;
-    res.pref = max(l.pref, l.sum + r.pref);
-    res.suff = max(r.suff, r.sum + l.suff);
-    res.ans = max(max(l.ans, r.ans), l.suff + r.pref);
     return res;
+  }
+ 
+  void push(int u, int l, int r) {
+    if (st[u].lazy_add == 0) return;
+    if (l != r) {
+      int v = 2 * u, w = 2 * u + 1;
+      st[v].lazy_add += st[u].lazy_add;
+      st[w].lazy_add += st[u].lazy_add;
+    }
+    st[u].sum += (r - l + 1) * st[u].lazy_add;
+    st[u].lazy_add = 0;
   }
  
   void build(int u, int s, int e, vector<int>& a) {
     if (s == e) {
-      #chagne
       st[u] = make_node(a[s]);
       return;
     }
@@ -53,24 +59,28 @@ struct SegTree {
     build(1, 1, size, a);
   }
  
-  void update(int u, int s, int e, int k, int val) {
-    if (s == e) {
-      #change
-      st[u] = make_node(val);
+  void update(int u, int s, int e, int l, int r, int val) {
+    push(u, s, e);
+    if (e < l || r < s) return;
+    if (l <= s && e <= r) {
+      st[u].lazy_add += val;
+      push(u, s, e);
       return;
     }
     int v = 2 * u, w = 2 * u + 1, m = (s + e) / 2;
-    if (k <= m) update(v, s, m, k, val);
-    else update(w, m + 1, e, k, val);
+    update(v, s, m, l, r, val);
+    update(w, m + 1, e, l, r, val);
     st[u] = merge(st[v], st[w]);
   }
-  void update(int k, int val) {
-    update(1, 1, size, k, val);
+  void update(int l, int r, int val) {
+    update(1, 1, size, l, r, val);
   }
  
   node query(int u, int s, int e, int l, int r) {
+    push(u, s, e);
     if (e < l || r < s) {
-      return node();
+      node mx = make_node(0);
+      return mx;
     }
     if (l <= s && e <= r) return st[u];
     int v = 2 * u, w = 2 * u + 1, m = (s + e) / 2;
@@ -88,13 +98,18 @@ int main() {
   vector<int> a(n + 1);
   for (int i = 1; i <= n; i++) cin >> a[i];
  
-  SegTree sg;
+  SegLazy sg;
   sg.init(n);
   sg.build(a);
  
   while (q--) {
-    int k, v; cin >> k >> v;
-    sg.update(k, v);
-    cout << sg.st[1].ans << '\n';
-	}
+    int type; cin >> type;
+    if (type == 1) {
+      int l, r, v; cin >> l >> r >> v;
+      sg.update(l, r, v);
+    } else {
+      int k; cin >> k;
+      cout << sg.query(k, k).sum << '\n';
+    }
+  }
 }

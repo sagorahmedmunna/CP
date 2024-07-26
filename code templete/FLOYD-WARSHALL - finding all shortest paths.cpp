@@ -1,4 +1,5 @@
-const INF = 1e9 + 9;
+// 0 based index
+const INF = (int)1e9 + 9;
 vector<vector<int>> d(n, vector<int> (n, INF));
 for (int i = 0; i < m; i++) {
   int u, v, dis; cin >> u >> v >> dis;

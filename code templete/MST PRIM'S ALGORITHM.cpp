@@ -1,5 +1,6 @@
 // https://cses.fi/problemset/task/1675/
 // Road Reparation
+// 1 based index
 
 #include <bits/stdc++.h>
 using namespace std;

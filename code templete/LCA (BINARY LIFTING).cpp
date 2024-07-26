@@ -34,6 +34,7 @@ int dis(int u, int v) {
   return depth[u] + depth[v] - 2 * depth[lca(u, v)];
 }
 
+// another approach
 // make u and v to same depth then lift
 int lca(int u, int v) {
   if (depth[u] < depth[v]) swap(u, v);
