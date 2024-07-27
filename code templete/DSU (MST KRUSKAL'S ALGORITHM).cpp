@@ -1,10 +1,13 @@
+// Road Reparation
+// https://cses.fi/problemset/task/1675
+
 #include <bits/stdc++.h>
 using namespace std;
 
 struct DSU {
   int size = 1;
   vector<int> parent, sz;
-  void init(int n) {
+  DSU(int n) {
     size = n;
     parent.resize(n + 1);
     sz.resize(n + 1);

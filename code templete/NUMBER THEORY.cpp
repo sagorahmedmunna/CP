@@ -27,17 +27,6 @@ for (auto& [p, c] : factors[num]) {
   sum_of_divisors *= (pow(p, c + 1) - 1) / (p - 1);
 }
 
-
-// (a * b) % p   (Binary Multiplication)
-int BinMul(long long a, long long b, int mod) {
-  int res = 0;
-  while (b) {
-    if (b & 1) res = (res + a) % mod;
-    a = (a + a) % mod;
-    b >>= 1;
-  }
-  return res;
-}
 // (a ^ b) % p   (Binary Exponentiation)
 int BinExp(long long a, long long b, int mod) {
   int res = 1;
@@ -48,6 +37,17 @@ int BinExp(long long a, long long b, int mod) {
   }
   return res;
 }
+// (a * b) % p   (Binary Multiplication)
+int BinMul(long long a, long long b, int mod) {
+  int res = 0;
+  while (b) {
+    if (b & 1) res = (res + a) % mod;
+    a = (a + a) % mod;
+    b >>= 1;
+  }
+  return res;
+}
+
 // (a / b) % p
 BinMul(a, BinExp(b, p - 2, p), p);
 // (a ^ (b ^ c)) % p
@@ -57,7 +57,7 @@ BinExp(a, BinExp(b, c, p - 1), p);
 struct NCR {
   vector<long long> fact, inv;
   int sz;
-  void init(int n) {
+  NCR(int n) {
     sz = n;
     fact.assign(sz, 0);
     inv.assign(sz, 0);

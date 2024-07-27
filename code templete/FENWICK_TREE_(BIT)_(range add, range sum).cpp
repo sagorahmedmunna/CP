@@ -12,15 +12,15 @@ struct BIT {
     size = n;
     bit.assign(n + 1, 0);
   }
-  void update(int idx, long long val) {
+  void add(int idx, long long val) {
     while (idx <= size) {
       bit[idx] += val;
       idx += idx & -idx;
     }
   }
-  void update(int l, int r, long long val) {
-    update(l, val);
-    update(r + 1, -val);
+  void add(int l, int r, long long val) {
+    add(l, val);
+    add(r + 1, -val);
   }
   long long query(int idx) {
     long long res = 0;
@@ -38,10 +38,10 @@ struct BIT {
 struct LazyBIT {
   BIT bitAdd, bitSub;
   LazyBIT(int n) : bitAdd(n), bitSub(n) {}
-  void update(int l, int r, int val) {
-    bitAdd.update(l, r, val);
-    bitSub.update(l, r, 1LL * (l - 1) * val);
-    bitSub.update(r + 1, 1LL * (-r + l - 1) * val);
+  void add(int l, int r, int val) {
+    bitAdd.add(l, r, val);
+    bitSub.add(l, r, 1LL * (l - 1) * val);
+    bitSub.add(r + 1, 1LL * (-r + l - 1) * val);
   }
   long long query(int idx) {
     return idx * bitAdd.query(idx) - bitSub.query(idx);
@@ -63,7 +63,7 @@ int main() {
 
   LazyBIT sg(n);
   for (int i = 1; i <= n; i++) {
-    sg.update(i, i, a[i]);
+    sg.add(i, i, a[i]);
   }
  
   while (q--) {
@@ -72,7 +72,7 @@ int main() {
     if (type == 1) {
       int l, r, val;
       cin >> l >> r >> val;
-      sg.update(l, r, val);
+      sg.add(l, r, val);
     } else {
       int k;
       cin >> k;

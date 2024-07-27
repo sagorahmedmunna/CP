@@ -13,7 +13,7 @@ int BinExp(long long a, long long b) {
 struct NCR {
   vector<long long> fact, inv;
   int sz;
-  void init(int n) {
+  NCR(int n) {
     sz = n;
     fact.assign(sz, 0);
     inv.assign(sz, 0);
