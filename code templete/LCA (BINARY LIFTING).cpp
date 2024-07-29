@@ -1,37 +1,78 @@
-const int N = 2e5 + 10, K = 20;
-vector<int> adj[N], tin(N), tout(N), depth(N);
-int t, par[N][K];
+#include <bits/stdc++.h>
+using namespace std;
 
-void dfs(int u, int p) {
-  tin[u] = t++;
-  par[u][0] = p;
-  for (int k = 1; k < K; k++) {
-    par[u][k] = par[par[u][k - 1]][k - 1];
+struct DFS {
+  int n, k, t = 0;
+  vector<int> tin, tout, depth, height, subtree_size;
+  vector<bool> is_leaf;
+  vector<vector<int>> parent;
+  DFS() {}
+  DFS(int root, vector<vector<int>>& adj) {
+    n = (int)adj.size() + 1;
+    k = __lg(n) + 1;
+    tin.assign(n, 0), tout.assign(n, 0), depth.assign(n, 0), height.assign(n, 0), subtree_size.assign(n, 0), is_leaf.assign(n, 1);
+    parent = vector<vector<int>> (n, vector<int> (k));
+    dfs(root, root, adj);
   }
-  for (auto& v : adj[u]) {
-    if (v == p) continue;
-    depth[v] = depth[u] + 1;
-    dfs(v, u);
-  }
-  tout[u] = t++;
-}
-
-bool is_anc(int u, int v) {
-  return tin[u] <= tin[v] && tout[v] <= tout[u];
-}
-
-int lca(int u, int v) {
-  if (is_anc(u, v)) return u;
-  for (int k = K - 1; k >= 0; k--) {
-    if (!is_anc(par[u][k], v)) {
-      u = par[u][k];
+  void dfs(int u, int p, vector<vector<int>>& adj) {
+    tin[u] = ++t;
+    subtree_size[u] = 1;
+    parent[u][0] = p;
+    for (int i = 1; i < k; i++) {
+      parent[u][i] = parent[parent[u][i - 1]][i - 1];
     }
+    for (auto& v : adj[u]) {
+      if (v != p) {
+        depth[v] = depth[u] + 1;
+        is_leaf[u] = 0;
+        dfs(v, u, adj);
+        height[u] = max(height[u], height[v] + 1);
+        subtree_size[u] += subtree_size[v];
+      }
+    }
+    tout[u] = ++t;
   }
-  return par[u][0];
-}
+  bool is_ancestor(int u, int v) {
+    return tin[u] <= tin[v] && tout[v] <= tout[u];
+  }
+};
 
-int dis(int u, int v) {
-  return depth[u] + depth[v] - 2 * depth[lca(u, v)];
+struct LCA {
+  DFS tree;
+  LCA(int root, vector<vector<int>>& adj) : tree(root, adj) {}
+  int lca(int u, int v) {
+    if (tree.is_ancestor(u, v)) return u;
+    for (int i = tree.k - 1; i >= 0; i--) {
+      if (!tree.is_ancestor(tree.parent[u][i], v)) {
+        u = tree.parent[u][i];
+      }
+    }
+    return tree.parent[u][0];
+  }
+  int dis(int u, int v) {
+    return tree.depth[u] + tree.depth[v] - 2 * tree.depth[lca(u, v)];
+  }
+};
+
+int main() {
+  int n, q;
+  cin >> n >> q;
+  vector<vector<int>> adj(n + 1, vector<int> ());
+  for (int i = 1; i <= n; i++) {
+    int u, v;
+    cin >> u >> v;
+    adj[u].push_back(v);
+    adj[v].push_back(u);
+  }
+
+  LCA tree(0, adj);
+
+  while (q--) {
+    int u, v;
+    cin >> u >> v;
+    cout << tree.lca(u, v) << '\n';
+  }
+  return 0;
 }
 
 // another approach

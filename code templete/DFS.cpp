@@ -1,27 +1,52 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-const int N = 2e5 + 10, K = 20;
-vector<int> adj[N], tin(N), tout(N), depth(N), height(N), parent(N);
-vector<int> is_leaf(N, 1),subtree_size(N);
-int one_cut_subtree_size_difference = N;
-int t, n;
+struct DFS {
+  int n, k, t = 0;
+  vector<int> tin, tout, depth, height, subtree_size;
+  vector<bool> is_leaf;
+  vector<vector<int>> parent;
+  DFS() {}
+  DFS(int root, vector<vector<int>>& adj) {
+    n = (int)adj.size() + 1;
+    k = __lg(n) + 1;
+    tin.assign(n, 0), tout.assign(n, 0), depth.assign(n, 0), height.assign(n, 0), subtree_size.assign(n, 0), is_leaf.assign(n, 1);
+    parent = vector<vector<int>> (n, vector<int> (k));
+    dfs(root, root, adj);
+  }
+  void dfs(int u, int p, vector<vector<int>>& adj) {
+    tin[u] = ++t;
+    subtree_size[u] = 1;
+    parent[u][0] = p;
+    for (int i = 1; i < k; i++) {
+      parent[u][i] = parent[parent[u][i - 1]][i - 1];
+    }
+    for (auto& v : adj[u]) {
+      if (v != p) {
+        depth[v] = depth[u] + 1;
+        is_leaf[u] = 0;
+        dfs(v, u, adj);
+        height[u] = max(height[u], height[v] + 1);
+        subtree_size[u] += subtree_size[v];
+      }
+    }
+    tout[u] = ++t;
+  }
+  bool is_ancestor(int u, int v) {
+    return tin[u] <= tin[v] && tout[v] <= tout[u];
+  }
+};
 
-void dfs(int u, int p) {
-	tin[u] = t++;
-	parent[u] = p;
-	for (auto& v : adj[u]) {
-		if (v == p) continue;
-		depth[v] = depth[u] + 1;
-		is_leaf[u] = 0;
-		dfs(v, u);
-		height[u] = max(height[u], height[v] + 1);
-		subtree_size[u] += subtree_size[v] + 1;
-	}
-	one_cut_subtree_size_difference = min(abs(subtree_size[u] - (n - subtree_size[u])), one_cut_subtree_size_difference);
-	tout[u] = t++;
-}
-
-bool is_ancestor(int u, int v) {
-	return tin[u] <= tin[v] && tout[v] <= tout[u];
+int main() {
+  int n;
+  cin >> n;
+  vector<vector<int>> adj(n + 1, vector<int> ());
+  for (int i = 1; i < n; i++) {
+    int u, v;
+    cin >> u >> v;
+    adj[u].push_back(v);
+    adj[v].push_back(u);
+  }
+  DFS A(1, adj);
+  return 0;
 }
