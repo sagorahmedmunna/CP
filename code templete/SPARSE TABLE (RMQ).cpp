@@ -1,7 +1,5 @@
 // https://cses.fi/problemset/task/1647/
 // Static Range Minimum Queries
-// 1 based indexing
-// for 0 basaed change i = 0, i < n
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -12,9 +10,9 @@ struct SparseTable {
   SparseTable(vector<int>& a) {
     n = a.size();
     while ((1 << LOG) <= n) LOG++;
-    st = vector<vector<int>> (n + 1, vector<int> (LOG));
+    st = vector<vector<int>> (n, vector<int> (LOG));
     for (int j = 0; j < LOG; j++) {
-      for (int i = 1; i + (1 << j) - 1 <= n; i++) {
+      for (int i = 0; i + (1 << j) - 1 < n; i++) {
         if (j == 0) st[i][j] = a[i];
         else st[i][j] = min(st[i][j - 1], st[i + (1 << (j - 1))][j - 1]);
       }
