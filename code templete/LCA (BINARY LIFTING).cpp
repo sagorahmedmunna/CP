@@ -81,6 +81,7 @@ int main() {
 int lca(int u, int v) {
   if (depth[u] < depth[v]) swap(u, v);
   int dis = depth[u] - depth[v];
+  // kth parent
   for (int i = k - 1; i >= 0; i--) {
     if (dis & (1 << i)) {
       u = par[u][i];
