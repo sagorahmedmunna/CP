@@ -35,6 +35,14 @@ struct DFS {
   bool is_ancestor(int u, int v) {
     return tin[u] <= tin[v] && tout[v] <= tout[u];
   }
+  int kth_parent(int u, int kth) {
+    for (int i = k - 1; i >= 0; i--) {
+      if (kth & (1 << i)) {
+        u = parent[u][i];
+      }
+    }
+    return u;
+  }
 };
 
 struct LCA {

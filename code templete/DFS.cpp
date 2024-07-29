@@ -35,6 +35,15 @@ struct DFS {
   bool is_ancestor(int u, int v) {
     return tin[u] <= tin[v] && tout[v] <= tout[u];
   }
+  int kth_parent(int u, int kth) {
+    if (kth < 0) return u;
+    for (int i = k - 1; i >= 0; i--) {
+      if (kth & (1 << i)) {
+        u = parent[u][i];
+      }
+    }
+    return u;
+  }
 };
 
 int main() {
@@ -47,6 +56,6 @@ int main() {
     adj[u].push_back(v);
     adj[v].push_back(u);
   }
-  DFS A(1, adj);
+  DFS tree(1, adj);
   return 0;
 }
