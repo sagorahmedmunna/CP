@@ -12,10 +12,23 @@ ios_base::sync_with_stdio(0), cin.tie(0);
 // ignore white space
 cin.ignore(); or cin >> ws;
 
+// STL merge function: merge two vectors or sets
+vector<int> a = {1, 2, 7}, b = {4, 2, 3};
+sort(a.begin(), a.end());
+sort(b.begin(), b.end());
+vector<int> c(a.size() + b.size());
+merge(a.begin(), a.end(), b.begin(), b.end(), c.begin());
+
+set<int> a = {3, 2, 1}, b = {4, 5, 1};
+set<int> c;
+merge(a.begin(), a.end(), b.begin(), b.end(), inserter(c, c.begin()));
+for (auto& i : c) cout << i << ' ';
+
 // tuple
 tuple<int, int, int> tup = {1, 2, 3};
 int first = get<0>(tup);
 
+// custom compare function
 struct item {
 	int a, b;
 };
