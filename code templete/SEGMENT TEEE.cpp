@@ -5,9 +5,7 @@
 using namespace std;
  
 struct SegTree {
- 
-  #change
-  struct node {
+  struct node { #change
     long long sum, pref, suff, ans;
     node() {
       sum = pref = suff = ans = 0;
@@ -22,17 +20,13 @@ struct SegTree {
     while (tree_size < n) tree_size *= 2;
     st.resize(tree_size * 2);
   }
- 
-  #change
-  node make_node(int val) {
+  node make_node(int val) { #change
     node res;
     res.sum = val;
     res.pref = res.suff = res.ans = max(0, val);
     return res;
   }
- 
-  #change
-  node merge(node l, node r) {
+  node merge(node l, node r) { #change
     node res;
     res.sum = l.sum + r.sum;
     res.pref = max(l.pref, l.sum + r.pref);
@@ -40,10 +34,8 @@ struct SegTree {
     res.ans = max(max(l.ans, r.ans), l.suff + r.pref);
     return res;
   }
- 
   void build(int u, int s, int e, vector<int>& a) {
-    if (s == e) {
-      #chagne
+    if (s == e) { #change
       st[u] = make_node(a[s]);
       return;
     }
@@ -55,10 +47,8 @@ struct SegTree {
   void build(vector<int>& a) {
     build(1, 1, size, a);
   }
- 
   void update(int u, int s, int e, int k, int val) {
-    if (s == e) {
-      #change
+    if (s == e) { #change
       st[u] = make_node(val);
       return;
     }
@@ -70,9 +60,8 @@ struct SegTree {
   void update(int k, int val) {
     update(1, 1, size, k, val);
   }
- 
   node query(int u, int s, int e, int l, int r) {
-    if (e < l || r < s) {
+    if (e < l || r < s) { #change
       return node();
     }
     if (l <= s && e <= r) return st[u];

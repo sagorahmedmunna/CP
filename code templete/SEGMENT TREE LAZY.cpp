@@ -5,7 +5,7 @@
 using namespace std;
  
 struct SegLazy {
-  struct node {
+  struct node { #change
     long long sum, lazy_add;
     node() {
       sum = lazy_add = 0;
@@ -20,21 +20,21 @@ struct SegLazy {
     while (tree_size < n) tree_size *= 2;
     st.resize(tree_size * 2);
   }
- 
-  node make_node(int val) {
+  
+  node make_node(long long val) { #change
     node res;
     res.sum = val;
     res.lazy_add = 0;
     return res;
   }
  
-  node merge(node l, node r) {
+  node merge(node& l, node& r) { #change
     node res;
     res.sum = l.sum + r.sum;
     return res;
   }
  
-  void push(int u, int l, int r) {
+  void push(int u, int l, int r) { #change
     if (st[u].lazy_add == 0) return;
     if (l != r) {
       int v = 2 * u, w = 2 * u + 1;
@@ -78,7 +78,7 @@ struct SegLazy {
  
   node query(int u, int s, int e, int l, int r) {
     push(u, s, e);
-    if (e < l || r < s) {
+    if (e < l || r < s) { #change
       node mx = make_node(0);
       return mx;
     }

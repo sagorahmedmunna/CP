@@ -4,11 +4,11 @@
 #include <bits/stdc++.h>
 using namespace std;
  
-struct BIT {
+struct FenWick {
   int size;
   vector<long long> bit;
-  BIT() {}
-  BIT(int n) {
+  FenWick() {}
+  FenWick(int n) {
     size = n;
     bit.assign(n + 1, 0);
   }
@@ -35,9 +35,9 @@ struct BIT {
   }
 };
 
-struct LazyBIT {
-  BIT bitAdd, bitSub;
-  LazyBIT(int n) : bitAdd(n), bitSub(n) {}
+struct LazyFenWick {
+  FenWick bitAdd, bitSub;
+  LazyFenWick(int n) : bitAdd(n), bitSub(n) {}
   void add(int l, int r, int val) {
     bitAdd.add(l, r, val);
     bitSub.add(l, r, 1LL * (l - 1) * val);
@@ -61,7 +61,7 @@ int main() {
     cin >> a[i];
   }
 
-  LazyBIT sg(n);
+  LazyFenWick sg(n);
   for (int i = 1; i <= n; i++) {
     sg.add(i, i, a[i]);
   }
