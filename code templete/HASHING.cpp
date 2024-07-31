@@ -45,7 +45,7 @@ void Preprocess() {
 struct Hashing {
   int n;
   vector<array<long long, 2>> hs;
-  Hashing (string& s) {
+  Hashing(string& s) {
     n = s.size();
     hs.resize(n + 1);
     for (int i = 0; i < n; i++) {
