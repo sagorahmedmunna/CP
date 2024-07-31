@@ -35,9 +35,9 @@ struct FenWick {
   }
 };
 
-struct LazyFenWick {
+struct FenWickLazy {
   FenWick bitAdd, bitSub;
-  LazyFenWick(int n) : bitAdd(n), bitSub(n) {}
+  FenWickLazy(int n) : bitAdd(n), bitSub(n) {}
   void add(int l, int r, int val) {
     bitAdd.add(l, r, val);
     bitSub.add(l, r, 1LL * (l - 1) * val);
@@ -61,7 +61,7 @@ int main() {
     cin >> a[i];
   }
 
-  LazyFenWick sg(n);
+  FenWickLazy sg(n);
   for (int i = 1; i <= n; i++) {
     sg.add(i, i, a[i]);
   }
