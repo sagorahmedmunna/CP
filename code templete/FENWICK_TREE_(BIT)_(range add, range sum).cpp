@@ -33,6 +33,19 @@ struct FenWick {
   long long query(int l, int r) {
     return query(r) - query(l - 1);
   }
+  int lower_bound(long long val) {
+    // return the index of lowerbound of prefix sum
+    int curr = 0;
+    long long sum = 0;
+    for (int i = __lg(size); i >= 0; i--) {
+      if (curr + (1 << i) > size) continue;
+      if (bit[curr + (1 << i)] + sum < val) {
+        curr += (1 << i);
+        sum += bit[curr];
+      }
+    }
+    return curr + 1;
+  }
 };
 
 struct FenWickLazy {
