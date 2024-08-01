@@ -30,7 +30,7 @@ struct MergeSortTree {
     #change
     for (int i = s; i <= e; i++) st[u].insert(a[i]);
     // st[u].resize(st[v].size() + st[w].size()); // merge sort (sorted array making)
-    // merge( st[v].begin(), st[v].end() , st[w].begin(), st[w].end() , st[u].begin());
+    // merge(st[v].begin(), st[v].end(), st[w].begin(), st[w].end(), st[u].begin());
   }
   void build(vector<int>& a) {
     build(1, 1, size, a);

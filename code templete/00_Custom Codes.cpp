@@ -99,7 +99,7 @@ gp_hash_table<int, int> mp;
 
 ---------------------------------------------------------
 // unordered map custom hash
-	
+
 struct custom_hash {
 	static uint64_t splitmix64(uint64_t x) {
 		x += 0x9e3779b97f4a7c15;
@@ -114,10 +114,9 @@ struct custom_hash {
 	}
 };
 unordered_map<int, int, custom_hash> ump;
-
 ---------------------------------------------------------
 // ordered set
-	
+
 #include <ext/pb_ds/assoc_container.hpp>
 #include <ext/pb_ds/tree_policy.hpp>
 using namespace __gnu_pbds;
