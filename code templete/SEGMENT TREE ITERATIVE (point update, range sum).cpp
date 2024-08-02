@@ -13,7 +13,6 @@ struct SegTreeIterative {
     while (tree_size < n) tree_size *= 2;
     st.resize(tree_size * 2);
   }
- 
   void build(vector<int>& a) {
     for (int i = 1; i <= n; ++i) {
       st[n + i] = a[i];
@@ -22,14 +21,12 @@ struct SegTreeIterative {
       st[u] = st[u << 1] + st[u << 1 | 1];
     }
   }
- 
   void update(int idx, int val) {
     st[idx += n] = val;
     for (idx /= 2; idx; idx /= 2) {
       st[idx] = st[idx << 1] + st[idx << 1 | 1];
     }
   }
- 
   long long query(int l, int r) {
     long long sum = 0;
     for (l += n, r += n + 1; l < r; l >>= 1, r >>= 1) {

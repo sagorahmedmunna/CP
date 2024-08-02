@@ -11,7 +11,6 @@ struct SegLazy {
       sum = lazy_add = 0;
     }
   };
- 
   int size = 1;
   vector<node> st;
   SegLazy(int n) {
@@ -20,20 +19,17 @@ struct SegLazy {
     while (tree_size < n) tree_size *= 2;
     st.resize(tree_size * 2);
   }
-  
   node make_node(long long val) { #change
     node res;
     res.sum = val;
     res.lazy_add = 0;
     return res;
   }
- 
   node merge(node& l, node& r) { #change
     node res;
     res.sum = l.sum + r.sum;
     return res;
   }
- 
   void push(int u, int l, int r) { #change
     if (st[u].lazy_add == 0) return;
     if (l != r) {
@@ -44,7 +40,6 @@ struct SegLazy {
     st[u].sum += (r - l + 1) * st[u].lazy_add;
     st[u].lazy_add = 0;
   }
- 
   void build(int u, int s, int e, vector<int>& a) {
     if (s == e) {
       st[u] = make_node(a[s]);
@@ -58,7 +53,6 @@ struct SegLazy {
   void build(vector<int>& a) {
     build(1, 1, size, a);
   }
- 
   void update(int u, int s, int e, int l, int r, int val) {
     push(u, s, e);
     if (e < l || r < s) return;
@@ -75,7 +69,6 @@ struct SegLazy {
   void update(int l, int r, int val) {
     update(1, 1, size, l, r, val);
   }
- 
   node query(int u, int s, int e, int l, int r) {
     push(u, s, e);
     if (e < l || r < s) { #change

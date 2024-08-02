@@ -11,7 +11,6 @@ struct SegTree {
       sum = pref = suff = ans = 0;
     }
   };
- 
   int size = 1;
   vector<node> st;
   SegTree(int n) {
