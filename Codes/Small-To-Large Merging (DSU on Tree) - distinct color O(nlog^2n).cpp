@@ -10,8 +10,12 @@ void dfs(int u, int p) {
 	for (auto& v : adj[u]) {
 		if (v == p) continue;
 		dfs(v, u);
-		if (st[v].size() > st[u].size()) swap(st[v], st[u]);
-		for (auto& c : st[v]) st[u].insert(c);
+		if (st[v].size() > st[u].size()) {
+      swap(st[v], st[u]);
+    }
+		for (auto& c : st[v]) {
+      st[u].insert(c);
+    }
 	}
 	ans[u] = st[u].size();
 }
