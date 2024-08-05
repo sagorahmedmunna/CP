@@ -4,10 +4,10 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-struct SparseTable {
+struct RMQ {
   int n = 1, LOG = 1;
   vector<vector<int>> st;
-  SparseTable(vector<int>& a) {
+  RMQ(vector<int>& a) {
     n = a.size();
     while ((1 << LOG) <= n) LOG++;
     st = vector<vector<int>> (n, vector<int> (LOG));
@@ -33,7 +33,7 @@ int main() {
     cin >> a[i];
   }
 
-  SparseTable st(a);
+  RMQ st(a);
 
   while (q--) {
     int l, r; cin >> l >> r;
