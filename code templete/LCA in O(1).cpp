@@ -76,8 +76,6 @@ int main() {
   while (q--) {
     int a, b;
     cin >> a >> b;
-    tree.lca(a, b);
-    auto x = tree.lca(a, b);
     cout << tree.lca(a, b) << '\n';
   }
   return 0;
