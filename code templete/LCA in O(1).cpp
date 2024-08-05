@@ -38,8 +38,8 @@ struct LCAinO1 {
     st = RMQ(euler);
   }
   void dfs(int u, int p, vector<vector<int>>& adj) {
-    tin[u] = ++t;
-    euler[t] = {depth[u], u};
+    euler[++t] = {depth[u], u};
+    tin[u] = t;
     for (auto& v : adj[u]) {
       if (v != p) {
         depth[v] = depth[u] + 1;
