@@ -19,7 +19,8 @@ struct DFS {
     subtree_size[u] = 1;
     parent[u][0] = p;
     for (int i = 1; i < k; i++) {
-      parent[u][i] = parent[parent[u][i - 1]][i - 1];
+      if (parent[u][i - 1] != -1) parent[u][i] = parent[parent[u][i - 1]][i - 1];
+      else parent[u][i] = -1;
     }
     for (auto& v : adj[u]) {
       if (v != p) {
@@ -36,10 +37,10 @@ struct DFS {
     return tin[u] <= tin[v] && tout[v] <= tout[u];
   }
   int kth_parent(int u, int kth) {
-    if (kth < 0) return u;
     for (int i = k - 1; i >= 0; i--) {
       if (kth & (1 << i)) {
         u = parent[u][i];
+        if (u == -1) return u;
       }
     }
     return u;
