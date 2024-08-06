@@ -18,6 +18,8 @@ while (itr--) {
 //Ternary Search (integer, max)
 int lo = 0, hi = n - 1;
 while (lo < hi) {
+  // int mid1 = lo + (hi - lo) / 3;
+  // int mid2 = hi - (hi - lo) / 3;
   int mid = (lo + hi) / 2;
   if (f(mid) < f(mid + 1))  lo = mid + 1;
   else  hi = mid;
