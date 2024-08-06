@@ -1,5 +1,5 @@
-// POLYMUL - Polynomial Multiplication
-// https://www.spoj.com/problems/POLYMUL/
+// Apples and Bananas
+// https://cses.fi/problemset/task/2111/
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -52,22 +52,26 @@ vector<long long> multiply(vector<int> &a, vector<int> &b) {
   return c;
 }
 
-void test() {
-  int n; cin >> n;
-  vector<int> a(n + 1), b(n + 1);
-  for (auto& ai : a) cin >> ai;
-  for (auto& bi : b) cin >> bi;
-  auto c = multiply(a, b);
-  for (auto& ci : c) cout << ci << ' ';
-  cout << '\n';
-}
-
 int main() {
   ios_base::sync_with_stdio(0), cin.tie(0);
-  int t = 1; 
-  cin >> t;
-  for (int i = 1; i <= t; i++) {
-    test();
+  
+  int k, n, m;
+  cin >> k >> n >> m;
+  vector<int> a(k + 1), b(k + 1);
+  for (int i = 0; i < n; i++) {
+    int ai;
+    cin >> ai;
+    a[ai]++;
   }
+  for (int i = 0; i < m; i++) {
+    int bi;
+    cin >> bi;
+    b[bi]++;
+  }
+  auto c = multiply(a, b);
+  for (int i = 2; i <= 2 * k; i++) {
+    cout << c[i] << ' ';
+  }
+  cout << '\n';
   return 0;
 }
