@@ -8,9 +8,8 @@ struct RMQ {
   int n = 1, LOG = 1;
   vector<vector<int>> st;
   RMQ(vector<int>& a) {
-    n = a.size();
-    while ((1 << LOG) <= n) LOG++;
-    st = vector<vector<int>> (n, vector<int> (LOG));
+    n = a.size(), LOG = __lg(n) + 1;
+    st.assign(n, vector<int> (LOG));
     for (int j = 0; j < LOG; j++) {
       for (int i = 0; i + (1 << j) - 1 < n; i++) {
         if (j == 0) st[i][j] = a[i];
