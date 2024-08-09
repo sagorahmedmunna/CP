@@ -55,21 +55,17 @@ BinExp(a, BinExp(b, c, p - 1), p);
 
 // NCR
 struct NCR {
-  vector<long long> fact, inv;
   int sz;
-  NCR(int n) {
-    sz = n;
-    fact.assign(sz, 0);
-    inv.assign(sz, 0);
+  vector<long long> fact, inv;
+  NCR(int n) : sz(n + 1) {
+    fact.assign(sz, 0), inv.assign(sz, 0);
     fact[0] = 1;
     for (int i = 1; i < sz; i++) {
-      fact[i] = fact[i - 1] * i;
-      fact[i] %= mod;
+      fact[i] = (fact[i - 1] * i) % mod;
     }
-    inv[n - 1] = BinExp(fact[n - 1], mod - 2);
+    inv[sz - 1] = BinExp(fact[sz - 1], mod - 2);
     for (int i = sz - 2; i >= 0; i--) {
-      inv[i] = inv[i + 1] * (i + 1);
-      inv[i] %= mod;
+      inv[i] = (inv[i + 1] * (i + 1)) % mod;
     }
   }
   int ncr(int n, int r) {
@@ -77,7 +73,7 @@ struct NCR {
     if (n < r) return 0;
     return ((fact[n] * inv[r]) % mod * inv[n - r]) % mod;
   }
-};
+} comb(N);
 
 // phi of single integer
 int n = 10;
