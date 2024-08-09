@@ -25,7 +25,7 @@ struct SegTree {
     res.pref = res.suff = res.ans = max(0, val);
     return res;
   }
-  node merge(node l, node r) { #change
+  node merge(node& l, node& r) { #change
     node res;
     res.sum = l.sum + r.sum;
     res.pref = max(l.pref, l.sum + r.pref);
@@ -86,5 +86,5 @@ int main() {
     int k, v; cin >> k >> v;
     sg.update(k, v);
     cout << sg.st[1].ans << '\n';
-	}
+  }
 }
