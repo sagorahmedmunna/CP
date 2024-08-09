@@ -12,16 +12,15 @@ int BinExp(long long a, long long b) {
 }
 
 struct NCR {
-  int sz;
   vector<long long> fact, inv;
-  NCR(int n) : sz(n + 1) {
-    fact.assign(sz, 0), inv.assign(sz, 0);
+  NCR(int n) {
+    fact.assign(n + 1, 0), inv.assign(n + 1, 0);
     fact[0] = 1;
-    for (int i = 1; i < sz; i++) {
+    for (int i = 1; i <= n; i++) {
       fact[i] = (fact[i - 1] * i) % mod;
     }
-    inv[sz - 1] = BinExp(fact[sz - 1], mod - 2);
-    for (int i = sz - 2; i >= 0; i--) {
+    inv[n] = BinExp(fact[n], mod - 2);
+    for (int i = n - 1; i >= 0; i--) {
       inv[i] = (inv[i + 1] * (i + 1)) % mod;
     }
   }
