@@ -1,4 +1,4 @@
-void compress(vector<int>& a) {
+void CompressArray(vector<int>& a) {
   auto b = a;
   sort(b.begin(), b.end());
   b.erase(unique(b.begin(), b.end()), b.end());
