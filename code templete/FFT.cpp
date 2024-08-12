@@ -16,7 +16,7 @@ struct cplx {
 const long double PI = acos(-1);
 vector<int> rev;
 
-void Preprocess(int sz){
+void Preprocess(int sz) {
   if ((int)rev.size() == sz) return;
   rev.resize(sz);
   rev[0] = 0;
@@ -26,17 +26,17 @@ void Preprocess(int sz){
   }
 }
 
-void fft(vector<cplx> &a, bool inv = 0){
+void fft(vector<cplx> &a, bool inv = 0) {
   int n = a.size();
   for (int i = 1; i < n - 1; ++i) {
     if (i < rev[i]) swap(a[i], a[rev[i]]);
   }
-  for (int len = 2; len <= n; len <<= 1){
+  for (int len = 2; len <= n; len <<= 1) {
     long double t = 2 * PI / len * (inv ? -1 : 1);
     cplx wlen = {cosl(t), sinl(t)};
-    for (int st = 0; st < n; st += len){
+    for (int st = 0; st < n; st += len) {
       cplx w(1);
-      for (int i = 0; i < len / 2; ++i){
+      for (int i = 0; i < len / 2; ++i) {
         cplx ev = a[st + i], od = a[st + i + len / 2] * w;
         a[st + i] = ev + od;
         a[st + i + len / 2] = ev - od;
