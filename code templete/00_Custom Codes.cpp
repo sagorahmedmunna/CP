@@ -70,9 +70,6 @@ int n = stoi(binary, 0, 2);
 string binary = bitset<64>(n).to_string();
 binary.erase(0, binary.find_first_not_of('0'));
 
-// upper to lower
-transform(a.begin(), a.end(), a.begin(), ::tolower);
-
 // count digit
 int d = log10(num) + 1;
 
@@ -84,8 +81,7 @@ n & ~(1 << i)
 n ^ (1 << i)
 
 // a point inside cricle
-// x1, y1 = point of circle
-// r = radius of circle
+// x1, y1 = point of circle, r = radius of circle
 // x2, y2 = target point
 bool isInside(int x1, int y1, int x2, int y2, int r) {
 	return ((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1)) <= r * r;
@@ -107,7 +103,6 @@ struct custom_hash {
 		x = (x ^ (x >> 27)) * 0x94d049bb133111eb;
 		return x ^ (x >> 31);
 	}
-
 	size_t operator()(uint64_t x) const {
 		static const uint64_t FIXED_RANDOM = chrono::steady_clock::now().time_since_epoch().count();
 		return splitmix64(x + FIXED_RANDOM);
