@@ -18,12 +18,8 @@ long long merge(vector<int>& a, int l, int mid, int r) {
     }
     k++;
   }
-  while (i < n1) {
-    a[k++] = a1[i++];
-  }
-  while (j < n2) {
-    a[k++] = a2[j++];
-  }
+  while (i < n1) a[k++] = a1[i++];
+  while (j < n2) a[k++] = a2[j++];
   return inv;
 }
 

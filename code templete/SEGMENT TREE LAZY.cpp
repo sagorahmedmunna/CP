@@ -25,7 +25,7 @@ struct SegLazy {
     res.lazy_add = 0;
     return res;
   }
-  node merge(node& l, node& r) { #change
+  node Merge(node& l, node& r) { #change
     node res;
     res.sum = l.sum + r.sum;
     return res;
@@ -48,7 +48,7 @@ struct SegLazy {
     int v = 2 * u, w = 2 * u + 1, m = (s + e) / 2;
     build(v, s, m, a);
     build(w, m + 1, e, a);
-    st[u] = merge(st[v], st[w]);
+    st[u] = Merge(st[v], st[w]);
   }
   void build(vector<int>& a) {
     build(1, 1, size, a);
@@ -64,7 +64,7 @@ struct SegLazy {
     int v = 2 * u, w = 2 * u + 1, m = (s + e) / 2;
     update(v, s, m, l, r, val);
     update(w, m + 1, e, l, r, val);
-    st[u] = merge(st[v], st[w]);
+    st[u] = Merge(st[v], st[w]);
   }
   void update(int l, int r, int val) {
     update(1, 1, size, l, r, val);
@@ -79,7 +79,7 @@ struct SegLazy {
     int v = 2 * u, w = 2 * u + 1, m = (s + e) / 2;
     node lsum = query(v, s, m, l, r);
     node rsum = query(w, m + 1, e, l, r);
-    return merge(lsum, rsum);
+    return Merge(lsum, rsum);
   }
   node query(int l, int r) {
     return query(1, 1, size, l, r);

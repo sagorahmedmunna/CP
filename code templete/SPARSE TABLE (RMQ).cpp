@@ -1,25 +1,29 @@
-// https://cses.fi/problemset/task/1647/
 // Static Range Minimum Queries
+// https://cses.fi/problemset/task/1647/
 
 #include <bits/stdc++.h>
 using namespace std;
 
-struct RMQ {
+template <class T> struct RMQ {
   int n = 1, LOG = 1;
-  vector<vector<int>> st;
-  RMQ(vector<int>& a) {
+  vector<vector<T>> st;
+  T Merge(T& a, T& b) {
+    return min(a, b); #change
+  }
+  RMQ() {}
+  RMQ(vector<T>& a) {
     n = a.size(), LOG = __lg(n) + 1;
-    st.assign(n, vector<int> (LOG));
+    st.assign(n, vector<T> (LOG));
     for (int j = 0; j < LOG; j++) {
       for (int i = 0; i + (1 << j) - 1 < n; i++) {
         if (j == 0) st[i][j] = a[i];
-        else st[i][j] = min(st[i][j - 1], st[i + (1 << (j - 1))][j - 1]);
+        else st[i][j] = Merge(st[i][j - 1], st[i + (1 << (j - 1))][j - 1]);
       }
     }
   }
-  int query(int l, int r) {
+  T Query(int l, int r) {
     int log = __lg(r - l + 1);
-    return min(st[l][log], st[r - (1 << log) + 1][log]);
+    return Merge(st[l][log], st[r - (1 << log) + 1][log]);
   }
 };
 
@@ -32,11 +36,11 @@ int main() {
     cin >> a[i];
   }
 
-  RMQ st(a);
+  RMQ<int> st(a);
 
   while (q--) {
     int l, r; cin >> l >> r;
-    cout << st.query(l, r) << '\n';
+    cout << st.Query(l, r) << '\n';
   }
   return 0;
 }

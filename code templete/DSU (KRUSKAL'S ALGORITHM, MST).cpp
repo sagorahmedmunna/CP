@@ -23,9 +23,8 @@ struct DSU {
   bool is_connected(int u, int v) {
     return find(u) == find(v);
   }
-  void merge(int u, int v) {
-    u = find(u);
-    v = find(v);
+  void Merge(int u, int v) {
+    u = find(u), v = find(v);
     if (u != v) {
       if (sz[u] < sz[v]) swap(u, v);
       parent[v] = u;
@@ -48,7 +47,7 @@ int main() {
   long long cost = 0;
   for (auto& [w, u, v] : edges) {
     if (d.is_connected(u, v)) continue;
-    d.merge(u, v);
+    d.Merge(u, v);
     cost = cost + w;
   }
   int cnt = 0;

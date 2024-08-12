@@ -25,7 +25,7 @@ struct SegTree {
     res.pref = res.suff = res.ans = max(0, val);
     return res;
   }
-  node merge(node& l, node& r) { #change
+  node Merge(node& l, node& r) { #change
     node res;
     res.sum = l.sum + r.sum;
     res.pref = max(l.pref, l.sum + r.pref);
@@ -41,7 +41,7 @@ struct SegTree {
     int v = 2 * u, w = 2 * u + 1, m = (s + e) / 2;
     build(v, s, m, a);
     build(w, m + 1, e, a);
-    st[u] = merge(st[v], st[w]);
+    st[u] = Merge(st[v], st[w]);
   }
   void build(vector<int>& a) {
     build(1, 1, size, a);
@@ -54,7 +54,7 @@ struct SegTree {
     int v = 2 * u, w = 2 * u + 1, m = (s + e) / 2;
     if (k <= m) update(v, s, m, k, val);
     else update(w, m + 1, e, k, val);
-    st[u] = merge(st[v], st[w]);
+    st[u] = Merge(st[v], st[w]);
   }
   void update(int k, int val) {
     update(1, 1, size, k, val);
@@ -67,7 +67,7 @@ struct SegTree {
     int v = 2 * u, w = 2 * u + 1, m = (s + e) / 2;
     node lsum = query(v, s, m, l, r);
     node rsum = query(w, m + 1, e, l, r);
-    return merge(lsum, rsum);
+    return Merge(lsum, rsum);
   }
   node query(int l, int r) {
     return query(1, 1, size, l, r);
