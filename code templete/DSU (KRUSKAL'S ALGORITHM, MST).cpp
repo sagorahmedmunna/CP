@@ -5,16 +5,10 @@
 using namespace std;
 
 struct DSU {
-  int size = 1;
   vector<int> parent, sz;
   DSU(int n) {
-    size = n;
-    parent.resize(n + 1);
-    sz.resize(n + 1);
-    for (int u = 1; u <= n; u++) {
-      parent[u] = u;
-      sz[u] = 1;
-    }
+    parent.resize(n + 1), sz.resize(n + 1, 1);
+    iota(parent.begin(), parent.end(), 0);
   }
   int find(int u) {
     if (u == parent[u]) return u;
