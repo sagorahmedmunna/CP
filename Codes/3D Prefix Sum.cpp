@@ -8,7 +8,7 @@ struct PrefixSum3D { // 1 based
   vector<vector<vector<long long>>> pf;
   PrefixSum3D(vector<vector<vector<int>>> &a) {
     int x = a.size(), y = a[0].size(), z = a[0][0].size();
-    pf = vector<vector<vector<long long>>> (x, vector<vector<long long>> (y, vector<long long> (z)));
+    pf.assign(x, vector<vector<long long>> (y, vector<long long> (z)));
     for (int i = 1; i < x; i++) {
       for (int j = 1; j < y; j++) {
         for (int k = 1; k < z; k++) {
