@@ -1,33 +1,26 @@
 const int mod = (int)1e9 + 7;
 const int N = (int)2e5 + 9;
 
-int BinExp(long long a, long long b) {
-  long long res = 1;
-  while (b) {
-    if (b & 1) res = (res * a) % mod;
-    a = (a * a) % mod;
-    b >>= 1;
-  }
-  return res;
-}
-
 struct Combinatorics {
-  vector<long long> fact, inv;
+  vector<long long> fact, inv, ifact;
   Combinatorics(int n) {
-    fact.assign(n + 1, 1), inv.assign(n + 1, 1);
+    fact.assign(n + 1, 1), inv.assign(n + 1, 1), ifact.assign(n + 1, 1);
+    inv[0] = 0;
     for (int i = 1; i <= n; i++) {
       fact[i] = (fact[i - 1] * i) % mod;
     }
-    inv[n] = BinExp(fact[n], mod - 2);
-    for (int i = n - 1; i >= 0; i--) {
-      inv[i] = (inv[i + 1] * (i + 1)) % mod;
+    for (int i = 2; i <= n; i++) {
+      inv[i] = mod - (mod / i) * inv[mod % i] % mod;
+    }
+    for (int i = 2; i <= n; i++) {
+      ifact[i] = (ifact[i - 1] * inv[i]) % mod;
     }
   }
-  int nPr(int n, int r) { // Permutaions
+  int nPr(int n, int r) { // Permutations
     if (n < r) return 0;
-    return (fact[n] * inv[n - r]) % mod;
+    return (fact[n] * ifact[n - r]) % mod;
   }
   int nCr(int n, int r) { // Combinations
-    return (nPr(n, r) * inv[r]) % mod;
+    return (nPr(n, r) * ifact[r]) % mod;
   }
 } comb(N);

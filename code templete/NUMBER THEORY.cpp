@@ -48,6 +48,8 @@ int BinMul(long long a, long long b, int mod) {
   return res;
 }
 
+// (a ^ -1) % p (inverse of a number)
+BinExp(a, p - 2);
 // (a / b) % p
 BinMul(a, BinExp(b, p - 2, p), p);
 // (a ^ (b ^ c)) % p
@@ -55,23 +57,26 @@ BinExp(a, BinExp(b, c, p - 1), p);
 
 // Permutations and Combinations
 struct Combinatorics {
-  vector<long long> fact, inv;
+  vector<long long> fact, inv, ifact;
   Combinatorics(int n) {
-    fact.assign(n + 1, 1), inv.assign(n + 1, 1);
+    fact.assign(n + 1, 1), inv.assign(n + 1, 1), ifact.assign(n + 1, 1);
+    inv[0] = 0;
     for (int i = 1; i <= n; i++) {
       fact[i] = (fact[i - 1] * i) % mod;
     }
-    inv[n] = BinExp(fact[n], mod - 2);
-    for (int i = n - 1; i >= 0; i--) {
-      inv[i] = (inv[i + 1] * (i + 1)) % mod;
+    for (int i = 2; i <= n; i++) {
+      inv[i] = mod - (mod / i) * inv[mod % i] % mod;
+    }
+    for (int i = 2; i <= n; i++) {
+      ifact[i] = (ifact[i - 1] * inv[i]) % mod;
     }
   }
-  int nPr(int n, int r) { // Permutaions
+  int nPr(int n, int r) { // Permutations
     if (n < r) return 0;
-    return (fact[n] * inv[n - r]) % mod;
+    return (fact[n] * ifact[n - r]) % mod;
   }
   int nCr(int n, int r) { // Combinations
-    return (nPr(n, r) * inv[r]) % mod;
+    return (nPr(n, r) * ifact[r]) % mod;
   }
 } comb(N);
 
