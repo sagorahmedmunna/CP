@@ -13,10 +13,10 @@ template <class T> struct SegTreeIterative {
     while (tree_size < n) tree_size *= 2;
     st.resize(tree_size * 2);
   }
-  T Merge(T& a, T& b) {
+  T Merge(T& a, T& b) { #change
     return min(a, b);
   }
-  void Build(vector<T>& a) { #change
+  void Build(vector<int>& a) {
     for (int i = 1; i <= n; ++i) {
       st[n + i] = a[i];
     }
@@ -33,8 +33,8 @@ template <class T> struct SegTreeIterative {
   T Query(int l, int r) {
     T sum = neutral;
     for (l += n, r += n + 1; l < r; l >>= 1, r >>= 1) {
-      if (l & 1)  sum = Merge(sum, st[l++]);
-      if (r & 1)  sum = Merge(sum, st[--r]);
+      if (l & 1) sum = Merge(sum, st[l++]);
+      if (r & 1) sum = Merge(sum, st[--r]);
     }
     return sum;
   }
