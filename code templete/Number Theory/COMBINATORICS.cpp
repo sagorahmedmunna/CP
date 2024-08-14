@@ -11,11 +11,10 @@ int BinExp(long long a, long long b) {
   return res;
 }
 
-struct NCR {
+struct Combinatorics {
   vector<long long> fact, inv;
-  NCR(int n) {
-    fact.assign(n + 1, 0), inv.assign(n + 1, 0);
-    fact[0] = 1;
+  Combinatorics(int n) {
+    fact.assign(n + 1, 1), inv.assign(n + 1, 1);
     for (int i = 1; i <= n; i++) {
       fact[i] = (fact[i - 1] * i) % mod;
     }
@@ -24,9 +23,11 @@ struct NCR {
       inv[i] = (inv[i + 1] * (i + 1)) % mod;
     }
   }
-  int ncr(int n, int r) {
-    if (n == r) return 1;
+  int nPr(int n, int r) { // Permutaions
     if (n < r) return 0;
-    return ((fact[n] * inv[r]) % mod * inv[n - r]) % mod;
+    return (fact[n] * inv[n - r]) % mod;
+  }
+  int nCr(int n, int r) { // Combinations
+    return (nPr(n, r) * inv[r]) % mod;
   }
 } comb(N);
