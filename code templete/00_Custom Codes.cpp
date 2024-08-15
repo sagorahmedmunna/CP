@@ -80,6 +80,10 @@ n & ~(1 << i)
 // toggle or inverse ith bit
 n ^ (1 << i)
 
+__builtin_popcountll(x)
+__builtin_clzll(x)
+__builtin_ctzll(x)
+
 // a point inside cricle
 // x1, y1 = point of circle, r = radius of circle
 // x2, y2 = target point
