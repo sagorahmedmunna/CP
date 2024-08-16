@@ -31,12 +31,12 @@ template <class T> struct SegTreeIterative {
     }
   }
   T Query(int l, int r) {
-    T sum = neutral;
+    T res = neutral;
     for (l += n, r += n + 1; l < r; l >>= 1, r >>= 1) {
-      if (l & 1) sum = Merge(sum, st[l++]);
-      if (r & 1) sum = Merge(sum, st[--r]);
+      if (l & 1) res = Merge(res, st[l++]);
+      if (r & 1) res = Merge(res, st[--r]);
     }
-    return sum;
+    return res;
   }
 };
 
