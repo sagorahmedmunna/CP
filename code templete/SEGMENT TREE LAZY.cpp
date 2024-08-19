@@ -4,7 +4,7 @@
 #include <bits/stdc++.h>
 using namespace std;
  
-struct SegLazy {
+struct SegmentTreeLazy {
   struct node { #change
     long long sum, lazy_add;
     node() {
@@ -13,7 +13,7 @@ struct SegLazy {
   };
   int size = 1;
   vector<node> st;
-  SegLazy(int n) {
+  SegmentTreeLazy(int n) {
     size = n;
     int tree_size = 1;
     while (tree_size < n) tree_size *= 2;
@@ -91,7 +91,7 @@ int main() {
   vector<int> a(n + 1);
   for (int i = 1; i <= n; i++) cin >> a[i];
  
-  SegLazy sg(n);
+  SegmentTreeLazy sg(n);
   sg.build(a);
  
   while (q--) {

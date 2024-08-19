@@ -4,11 +4,11 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-template <class T> struct SegTreeIterative {
+template <class T> struct SegmentTreeIterative {
   int n = 1;
   vector<T> st;
-  SegTreeIterative() {}
-  SegTreeIterative(int _n) {
+  SegmentTreeIterative() {}
+  SegmentTreeIterative(int _n) {
     n = _n;
     int tree_size = 1;
     while (tree_size < n) tree_size *= 2;
@@ -52,7 +52,7 @@ int main() {
     cin >> a[i];
   }
   
-  SegTreeIterative<int> sg(n);
+  SegmentTreeIterative<int> sg(n);
   sg.Build(a);
 
   while (q--) {

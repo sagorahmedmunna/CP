@@ -4,7 +4,7 @@
 #include <bits/stdc++.h>
 using namespace std;
  
-struct SegTree {
+struct SegmentTree {
   struct node { #change
     long long sum, pref, suff, ans;
     node() {
@@ -13,7 +13,7 @@ struct SegTree {
   };
   int size = 1;
   vector<node> st;
-  SegTree(int n) {
+  SegmentTree(int n) {
     size = n;
     int tree_size = 1;
     while (tree_size < n) tree_size *= 2;
@@ -79,7 +79,7 @@ int main() {
   vector<int> a(n + 1);
   for (int i = 1; i <= n; i++) cin >> a[i];
  
-  SegTree sg(n);
+  SegmentTree sg(n);
   sg.build(a);
  
   while (q--) {
