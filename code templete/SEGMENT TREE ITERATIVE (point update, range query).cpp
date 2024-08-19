@@ -7,6 +7,7 @@ using namespace std;
 template <class T> struct SegTreeIterative {
   int n = 1, neutral = INT_MAX; #change
   vector<T> st;
+  SegTreeIterative() {}
   SegTreeIterative(int _n) {
     n = _n;
     int tree_size = 1;
