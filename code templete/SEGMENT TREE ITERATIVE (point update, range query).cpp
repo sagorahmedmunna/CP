@@ -5,7 +5,7 @@
 using namespace std;
 
 template <class T> struct SegTreeIterative {
-  int n = 1, neutral = INT_MAX; #change
+  int n = 1;
   vector<T> st;
   SegTreeIterative() {}
   SegTreeIterative(int _n) {
@@ -14,6 +14,7 @@ template <class T> struct SegTreeIterative {
     while (tree_size < n) tree_size *= 2;
     st.resize(tree_size * 2);
   }
+  int neutral = INT_MAX; #change
   T Merge(T& a, T& b) { #change
     return min(a, b);
   }
