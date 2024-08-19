@@ -10,7 +10,7 @@ struct DFS {
   DFS(int root, vector<vector<int>>& adj) {
     n = (int)adj.size() + 1;
     k = __lg(n) + 1;
-    tin.assign(n, 0), tout.assign(n, 0), depth.assign(n, 0), height.assign(n, 0), subtree_size.assign(n, 0), heavy.assign(n, - 1), is_leaf.assign(n, 1);
+    tin.resize(n), tout.resize(n), depth.resize(n), height.resize(n), subtree_size.resize(n), heavy.assign(n, - 1), is_leaf.assign(n, 1);
     parent = vector<vector<int>> (n, vector<int> (k));
     dfs(root, root, adj);
   }

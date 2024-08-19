@@ -48,7 +48,7 @@ struct HeavyLightDecomposition {
   SegmentTreeIterative<int> sg;
   HeavyLightDecomposition(int root, vector<vector<int>>& adj, vector<int>& values) {
     int n = (int)adj.size() + 1;
-    tin.assign(n, 0), depth.assign(n, 0), subtree_size.assign(n, 0), parent.assign(n, 0), heavy.assign(n, -1), head.assign(n, 0), euler.assign(n, 0);
+    tin.resize(n), depth.resize(n), subtree_size.resize(n), parent.resize(n), heavy.assign(n, -1), head.resize(n), euler.resize(n);
     Dfs(root, root, adj);
     Decompose(root, root, adj, values);
     sg = SegmentTreeIterative<int> (n);
