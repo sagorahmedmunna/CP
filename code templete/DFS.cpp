@@ -3,14 +3,14 @@ using namespace std;
 
 struct DFS {
   int n, k, t = 0;
-  vector<int> tin, tout, depth, height, subtree_size;
+  vector<int> tin, tout, depth, height, subtree_size, heavy;
   vector<bool> is_leaf;
   vector<vector<int>> parent;
   DFS() {}
   DFS(int root, vector<vector<int>>& adj) {
     n = (int)adj.size() + 1;
     k = __lg(n) + 1;
-    tin.assign(n, 0), tout.assign(n, 0), depth.assign(n, 0), height.assign(n, 0), subtree_size.assign(n, 0), is_leaf.assign(n, 1);
+    tin.assign(n, 0), tout.assign(n, 0), depth.assign(n, 0), height.assign(n, 0), subtree_size.assign(n, 0), heavy.assign(n, - 1), is_leaf.assign(n, 1);
     parent = vector<vector<int>> (n, vector<int> (k));
     dfs(root, root, adj);
   }
@@ -29,6 +29,9 @@ struct DFS {
         dfs(v, u, adj);
         height[u] = max(height[u], height[v] + 1);
         subtree_size[u] += subtree_size[v];
+        if (heavy[u] == -1 || subtree_size[heavy[u]] < subtree_size[v]) {
+          heavy[u] = v;
+        }
       }
     }
     tout[u] = ++t;
