@@ -19,7 +19,7 @@ struct SegmentTreeLazy {
     while (tree_size < n) tree_size *= 2;
     st.resize(tree_size * 2);
   }
-  node make_node(long long val) { #change
+  node Make_node(long long val) { #change
     node res;
     res.sum = val;
     res.lazy_add = 0;
@@ -40,20 +40,20 @@ struct SegmentTreeLazy {
     st[u].sum += (r - l + 1) * st[u].lazy_add;
     st[u].lazy_add = 0;
   }
-  void build(int u, int s, int e, vector<int>& a) {
+  void Build(int u, int s, int e, vector<int>& a) {
     if (s == e) {
-      st[u] = make_node(a[s]);
+      st[u] = Make_node(a[s]);
       return;
     }
     int v = 2 * u, w = 2 * u + 1, m = (s + e) / 2;
-    build(v, s, m, a);
-    build(w, m + 1, e, a);
+    Build(v, s, m, a);
+    Build(w, m + 1, e, a);
     st[u] = Merge(st[v], st[w]);
   }
-  void build(vector<int>& a) {
-    build(1, 1, size, a);
+  void Build(vector<int>& a) {
+    Build(1, 1, size, a);
   }
-  void update(int u, int s, int e, int l, int r, int val) {
+  void Update(int u, int s, int e, int l, int r, int val) {
     push(u, s, e);
     if (e < l || r < s) return;
     if (l <= s && e <= r) {
@@ -62,27 +62,27 @@ struct SegmentTreeLazy {
       return;
     }
     int v = 2 * u, w = 2 * u + 1, m = (s + e) / 2;
-    update(v, s, m, l, r, val);
-    update(w, m + 1, e, l, r, val);
+    Update(v, s, m, l, r, val);
+    Update(w, m + 1, e, l, r, val);
     st[u] = Merge(st[v], st[w]);
   }
-  void update(int l, int r, int val) {
-    update(1, 1, size, l, r, val);
+  void Update(int l, int r, int val) {
+    Update(1, 1, size, l, r, val);
   }
-  node query(int u, int s, int e, int l, int r) {
+  node Query(int u, int s, int e, int l, int r) {
     push(u, s, e);
     if (e < l || r < s) { #change
-      node mx = make_node(0);
+      node mx = Make_node(0);
       return mx;
     }
     if (l <= s && e <= r) return st[u];
     int v = 2 * u, w = 2 * u + 1, m = (s + e) / 2;
-    node lsum = query(v, s, m, l, r);
-    node rsum = query(w, m + 1, e, l, r);
+    node lsum = Query(v, s, m, l, r);
+    node rsum = Query(w, m + 1, e, l, r);
     return Merge(lsum, rsum);
   }
-  node query(int l, int r) {
-    return query(1, 1, size, l, r);
+  node Query(int l, int r) {
+    return Query(1, 1, size, l, r);
   }
 };
  
@@ -92,16 +92,16 @@ int main() {
   for (int i = 1; i <= n; i++) cin >> a[i];
  
   SegmentTreeLazy sg(n);
-  sg.build(a);
+  sg.Build(a);
  
   while (q--) {
     int type; cin >> type;
     if (type == 1) {
       int l, r, v; cin >> l >> r >> v;
-      sg.update(l, r, v);
+      sg.Update(l, r, v);
     } else {
       int k; cin >> k;
-      cout << sg.query(k, k).sum << '\n';
+      cout << sg.Query(k, k).sum << '\n';
     }
   }
 }
