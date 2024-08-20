@@ -13,8 +13,14 @@ struct SegmentTreeLazy {
   };
   int size = 1;
   vector<node> st;
-  SegmentTreeLazy(int n) {
-    size = n;
+  SegmentTreeLazy() {}
+  SegmentTreeLazy(int n) { Initial(n); }
+  SegmentTreeLazy(vector<int>& a) {
+    Initial((int)a.size() - 1);
+    Build(1, 1, size, a);
+  }
+  void Initial(int _n) {
+    size = _n;
     int tree_size = 1;
     while (tree_size < n) tree_size *= 2;
     st.resize(tree_size * 2);
@@ -49,9 +55,6 @@ struct SegmentTreeLazy {
     Build(v, s, m, a);
     Build(w, m + 1, e, a);
     st[u] = Merge(st[v], st[w]);
-  }
-  void Build(vector<int>& a) {
-    Build(1, 1, size, a);
   }
   void Update(int u, int s, int e, int l, int r, int val) {
     push(u, s, e);

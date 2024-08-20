@@ -8,7 +8,12 @@ template <class T> struct SegmentTreeIterative {
   int n = 1;
   vector<T> st;
   SegmentTreeIterative() {}
-  SegmentTreeIterative(int _n) {
+  SegmentTreeIterative(int n) { Initial(n); }
+  SegmentTreeIterative(vector<int>& a) {
+    Initial((int)a.size() - 1);
+    Build(a);
+  }
+  void Initial(int _n) {
     n = _n;
     int tree_size = 1;
     while (tree_size < n) tree_size *= 2;
@@ -52,8 +57,7 @@ int main() {
     cin >> a[i];
   }
   
-  SegmentTreeIterative<int> sg(n);
-  sg.Build(a);
+  SegmentTreeIterative<int> sg(a);
 
   while (q--) {
     int type;
