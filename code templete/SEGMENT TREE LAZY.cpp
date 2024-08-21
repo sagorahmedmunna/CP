@@ -36,7 +36,7 @@ struct SegmentTreeLazy {
     res.sum = l.sum + r.sum;
     return res;
   }
-  void push(int u, int l, int r) { #change
+  void Push(int u, int l, int r) { #change
     if (st[u].lazy_add == 0) return;
     if (l != r) {
       int v = 2 * u, w = 2 * u + 1;
@@ -57,11 +57,11 @@ struct SegmentTreeLazy {
     st[u] = Merge(st[v], st[w]);
   }
   void Update(int u, int s, int e, int l, int r, int val) {
-    push(u, s, e);
+    Push(u, s, e);
     if (e < l || r < s) return;
     if (l <= s && e <= r) {
       st[u].lazy_add += val;
-      push(u, s, e);
+      Push(u, s, e);
       return;
     }
     int v = 2 * u, w = 2 * u + 1, m = (s + e) / 2;
@@ -73,7 +73,7 @@ struct SegmentTreeLazy {
     Update(1, 1, size, l, r, val);
   }
   node Query(int u, int s, int e, int l, int r) {
-    push(u, s, e);
+    Push(u, s, e);
     if (e < l || r < s) { #change
       node mx = Make_node(0);
       return mx;
