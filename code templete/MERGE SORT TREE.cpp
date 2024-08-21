@@ -78,8 +78,7 @@ int main() {
   vector<int> a(n + 1);
   for (int i = 1; i <= n; i++) cin >> a[i];
  
-  MergeSortTree mst(n);
-  mst.Build(a);
+  MergeSortTree mst(a);
  
   while (q--) {
     int l, r, k; cin >> l >> r >> k;
