@@ -8,9 +8,19 @@ struct FenWickTree {
   int n;
   vector<long long> ft;
   FenWickTree() {}
-  FenWickTree(int _n) {
+  FenWickTree(int n) { Initial(n); }
+  FenWickTree(vector<int>& a) {
+    Initial((int)a.size());
+    Build(a);
+  }
+  void Initial(int _n) {
     n = _n;
     ft.assign(n + 1, 0);
+  }
+  void Build(vector<int>& a) {
+    for (int i = 1; i < (int)a.size(); i++) {
+      Add(i, i, a[i]); #change
+    }
   }
   void Add(int idx, long long val) {
     for (int i = idx; i <= n; i += i & -i) {
