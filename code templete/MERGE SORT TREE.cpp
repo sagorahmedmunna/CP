@@ -13,8 +13,14 @@ template <class T> using ordered_multiset = tree<T, null_type, less_equal<T>, rb
 struct MergeSortTree {
   int size = 1;
   vector<ordered_multiset<int>> st; #change
-  MergeSortTree(int n) {
-    size = n;
+  MergeSortTree() {}
+  MergeSortTree(int n) { Initial(n); }
+  MergeSortTree(vector<int>& a) {
+    Initial((int)a.size() - 1);
+    Build(1, 1, size, a);
+  }
+  void Initial(int _n) {
+    size = _n;
     int tree_size = 1;
     while (tree_size < n) tree_size *= 2;
     st.resize(tree_size * 2);
@@ -31,9 +37,6 @@ struct MergeSortTree {
     for (int i = s; i <= e; i++) st[u].insert(a[i]);
     // st[u].resize(st[v].size() + st[w].size()); // merge sort (sorted array making)
     // merge(st[v].begin(), st[v].end(), st[w].begin(), st[w].end(), st[u].begin());
-  }
-  void Build(vector<int>& a) {
-    Build(1, 1, size, a);
   }
   void Update(int u, int s, int e, int k, int prev, int curr) {
     if (s == e) { #change

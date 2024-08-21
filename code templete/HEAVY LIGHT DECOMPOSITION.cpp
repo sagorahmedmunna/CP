@@ -8,15 +8,20 @@ template <class T> struct SegmentTreeIterative {
   int n = 1;
   vector<T> st;
   SegmentTreeIterative() {}
-  SegmentTreeIterative(int _n) {
+  SegmentTreeIterative(int n) { Initial(n); }
+  SegmentTreeIterative(vector<int>& a) {
+    Initial((int)a.size() - 1);
+    Build(a);
+  }
+  void Initial(int _n) {
     n = _n;
     int tree_size = 1;
     while (tree_size < n) tree_size *= 2;
     st.resize(tree_size * 2);
   }
   int neutral = 0; #change
-  T Merge(T& a, T& b) {
-    return max(a, b); #change
+  T Merge(T& a, T& b) { #change
+    return max(a, b);
   }
   void Build(vector<int>& a) {
     for (int i = 1; i <= n; ++i) {
@@ -51,8 +56,7 @@ struct HeavyLightDecomposition {
     tin.resize(n), depth.resize(n), subtree_size.resize(n), parent.resize(n), heavy.assign(n, -1), head.resize(n), euler.resize(n);
     Dfs(root, root, adj);
     Decompose(root, root, adj, values);
-    sg = SegmentTreeIterative<int> (n);
-    sg.Build(euler);
+    sg = SegmentTreeIterative<int> (euler);
   }
   void Dfs(int u, int p, vector<vector<int>>& adj) {
     subtree_size[u] = 1;
