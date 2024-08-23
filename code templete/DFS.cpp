@@ -7,7 +7,7 @@ struct DFS {
   vector<bool> is_leaf;
   vector<vector<int>> parent;
   DFS() {}
-  DFS(int root, vector<vector<int>>& adj) {
+  DFS(vector<vector<int>>& adj, int root = 1) {
     n = (int)adj.size() + 1;
     k = __lg(n) + 1;
     tin.resize(n), tout.resize(n), depth.resize(n), height.resize(n), subtree_size.resize(n), heavy.assign(n, - 1), is_leaf.assign(n, 1);
@@ -60,6 +60,6 @@ int main() {
     adj[u].push_back(v);
     adj[v].push_back(u);
   }
-  DFS tree(1, adj);
+  DFS tree(adj, 1);
   return 0;
 }

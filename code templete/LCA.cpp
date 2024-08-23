@@ -6,7 +6,7 @@ struct DFS {
   vector<int> tin, tout, depth;
   vector<vector<int>> parent;
   DFS() {}
-  DFS(int root, vector<vector<int>>& adj) {
+  DFS(vector<vector<int>>& adj, int root = 1) {
     n = (int)adj.size() + 1, k = __lg(n) + 1;
     tin.assign(n, 0), tout.assign(n, 0), depth.assign(n, 0);
     parent = vector<vector<int>> (n, vector<int> (k));
@@ -34,7 +34,7 @@ struct DFS {
 
 struct LCA {
   DFS tree;
-  LCA(int root, vector<vector<int>>& adj) : tree(root, adj) {}
+  LCA(vector<vector<int>>& adj, int root = 1) : tree(adj, root) {}
   int lca(int u, int v) {
     if (tree.is_ancestor(u, v)) return u;
     for (int i = tree.k - 1; i >= 0; i--) {
@@ -60,7 +60,7 @@ int main() {
     adj[v].push_back(u);
   }
 
-  LCA tree(1, adj);
+  LCA tree(adj, 1);
 
   while (q--) {
     int u, v;
