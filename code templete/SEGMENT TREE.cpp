@@ -49,7 +49,7 @@ struct SegmentTree {
     Build(w, m + 1, e, a);
     st[u] = Merge(st[v], st[w]);
   }
-  void Update(int u, int s, int e, int k, int val) {
+  void Update(int u, int s, int e, int k, long long val) {
     if (s == e) { #change
       st[u] = Make_node(val);
       return;
@@ -59,7 +59,7 @@ struct SegmentTree {
     else Update(w, m + 1, e, k, val);
     st[u] = Merge(st[v], st[w]);
   }
-  void Update(int k, int val) {
+  void Update(int k, long long val) {
     Update(1, 1, size, k, val);
   }
   node Query(int u, int s, int e, int l, int r) {

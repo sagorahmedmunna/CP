@@ -56,7 +56,7 @@ struct SegmentTreeLazy {
     Build(w, m + 1, e, a);
     st[u] = Merge(st[v], st[w]);
   }
-  void Update(int u, int s, int e, int l, int r, int val) {
+  void Update(int u, int s, int e, int l, int r, long long val) {
     Push(u, s, e);
     if (e < l || r < s) return;
     if (l <= s && e <= r) {
@@ -69,7 +69,7 @@ struct SegmentTreeLazy {
     Update(w, m + 1, e, l, r, val);
     st[u] = Merge(st[v], st[w]);
   }
-  void Update(int l, int r, int val) {
+  void Update(int l, int r, long long val) {
     Update(1, 1, size, l, r, val);
   }
   node Query(int u, int s, int e, int l, int r) {
