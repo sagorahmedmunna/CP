@@ -12,7 +12,7 @@ template <class T> struct RMQ {
   }
   RMQ() {}
   RMQ(vector<T>& a) {
-    n = a.size(), LOG = __lg(n) + 1;
+    n = (int)a.size(), LOG = __lg(n) + 1;
     st.assign(n, vector<T> (LOG));
     for (int j = 0; j < LOG; j++) {
       for (int i = 0; i + (1 << j) - 1 < n; i++) {
