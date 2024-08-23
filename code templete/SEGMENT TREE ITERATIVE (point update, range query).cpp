@@ -31,7 +31,7 @@ template <class T> struct SegmentTreeIterative {
       st[u] = Merge(st[u << 1], st[u << 1 | 1]);
     }
   }
-  void Update(int idx, int val) {
+  void Update(int idx, T val) {
     st[idx += n] = val;
     for (idx /= 2; idx; idx /= 2) {
       st[idx] = Merge(st[idx << 1], st[idx << 1 | 1]);
