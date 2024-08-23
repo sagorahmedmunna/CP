@@ -23,4 +23,7 @@ struct Combinatorics {
   int nCr(int n, int r) { // Combinations
     return (nPr(n, r) * ifact[r]) % mod;
   }
+  int nCRr(int n, int r) { // Combinations with repetition
+    return (nPr(n + r - 1, r) * ifact[r]) % mod;
+  }
 } comb(N);
