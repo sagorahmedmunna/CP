@@ -82,8 +82,7 @@ int main() {
   vector<int> a(n + 1);
   for (int i = 1; i <= n; i++) cin >> a[i];
  
-  SegmentTree sg(n);
-  sg.Build(a);
+  SegmentTree sg(a);
  
   while (q--) {
     int k, v; cin >> k >> v;
