@@ -29,6 +29,7 @@ for (auto& [p, c] : factors[num]) {
 
 // (a ^ b) % p   (Binary Exponentiation)
 int BinExp(long long a, long long b, int mod) {
+  a %= mod, b %= mod;
   int res = 1;
   while (b) {
     if (b & 1) res = (res * a) % mod;
@@ -39,6 +40,7 @@ int BinExp(long long a, long long b, int mod) {
 }
 // (a * b) % p   (Binary Multiplication)
 int BinMul(long long a, long long b, int mod) {
+  a %= mod, b %= mod;
   int res = 0;
   while (b) {
     if (b & 1) res = (res + a) % mod;
@@ -48,12 +50,12 @@ int BinMul(long long a, long long b, int mod) {
   return res;
 }
 
-// (a ^ -1) % p (inverse of a number)
-BinExp(a, p - 2);
-// (a / b) % p
-BinMul(a, BinExp(b, p - 2, p), p);
-// (a ^ (b ^ c)) % p
-BinExp(a, BinExp(b, c, p - 1), p);
+// (a ^ -1) % mod (inverse of a number)
+BinExp(a, mod - 2);
+// (a / b) % mod
+BinMul(a, BinExp(b, mod - 2, mod), mod);
+// (a ^ (b ^ c)) % mod
+BinExp(a, BinExp(b, c, mod - 1), mod);
 
 // Permutations and Combinations
 struct Combinatorics {
