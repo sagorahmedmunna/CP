@@ -1,4 +1,4 @@
-struct AhoCorasick {
+struct Trie {
   struct node {
     int word_cnt, pref_cnt;
     node* nxt[26];
@@ -10,7 +10,7 @@ struct AhoCorasick {
     }
   };
   node* root;
-  AhoCorasick() {
+  Trie() {
     root = new node();
   }
   void add(string& s) {
