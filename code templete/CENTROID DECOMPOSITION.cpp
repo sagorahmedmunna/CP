@@ -7,11 +7,11 @@ struct CentroidDecomposition {
     sz.resize(n), is_cen.resize(n), cpar.resize(n), cdep.resize(n);
     Decompose(root, -1, 0, adj);
   }
-  void Calc_sz(int u, int p, T& adj) {
+  void Cal_sz(int u, int p, T& adj) {
     sz[u] = 1;
     for (auto& v : adj[u]) {
       if (v != p && !is_cen[v]) {
-        Calc_sz(v, u, adj);
+        Cal_sz(v, u, adj);
         sz[u] += sz[v];
       }
     }
@@ -25,7 +25,7 @@ struct CentroidDecomposition {
     return u;
   }
   void Decompose(int u, int p,  int d, T& adj) {
-    Calc_sz(u, p, adj);
+    Cal_sz(u, p, adj);
     int c = Get_cen(u, p, sz[u], adj);
     is_cen[c] = 1, cpar[c] = p, cdep[c] = d;
     for (auto& v : adj[c]) {
