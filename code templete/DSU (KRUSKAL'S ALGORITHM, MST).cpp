@@ -10,15 +10,15 @@ struct DSU {
     parent.resize(n + 1), sz.resize(n + 1, 1);
     iota(parent.begin(), parent.end(), 0);
   }
-  int find(int u) {
+  int Find(int u) {
     if (u == parent[u]) return u;
-    return parent[u] = find(parent[u]);
+    return parent[u] = Find(parent[u]);
   }
-  bool is_connected(int u, int v) {
-    return find(u) == find(v);
+  bool Is_connected(int u, int v) {
+    return Find(u) == Find(v);
   }
   void Merge(int u, int v) {
-    u = find(u), v = find(v);
+    u = Find(u), v = Find(v);
     if (u != v) {
       if (sz[u] < sz[v]) swap(u, v);
       parent[v] = u;
@@ -40,13 +40,13 @@ int main() {
   d.init(n);
   long long cost = 0;
   for (auto& [w, u, v] : edges) {
-    if (d.is_connected(u, v)) continue;
+    if (d.Is_connected(u, v)) continue;
     d.Merge(u, v);
     cost = cost + w;
   }
   int cnt = 0;
   for (int i = 1; i <= n; i++) {
-    cnt += i == d.find(i);
+    cnt += i == d.Find(i);
   }
   if (cnt > 1) {
     cout << "IMPOSSIBLE" << '\n';
