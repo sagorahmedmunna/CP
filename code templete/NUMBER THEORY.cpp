@@ -29,7 +29,7 @@ for (auto& [p, c] : factors[num]) {
 
 // (a ^ b) % p   (Binary Exponentiation)
 int BinExp(long long a, long long b, int mod) {
-  a %= mod, b %= mod;
+  a %= mod;
   int res = 1;
   while (b) {
     if (b & 1) res = (res * a) % mod;
@@ -40,7 +40,7 @@ int BinExp(long long a, long long b, int mod) {
 }
 // (a * b) % p   (Binary Multiplication)
 int BinMul(long long a, long long b, int mod) {
-  a %= mod, b %= mod;
+  a %= mod;
   int res = 0;
   while (b) {
     if (b & 1) res = (res + a) % mod;
