@@ -18,7 +18,7 @@ struct FenWickTree {
     ft.assign(n + 1, 0);
   }
   void Build(vector<int>& a) {
-    for (int i = 1; i < (int)a.size(); i++) {
+    for (int i = 0; i < (int)a.size(); i++) {
       Add(i, i, a[i]); #change
     }
   }
