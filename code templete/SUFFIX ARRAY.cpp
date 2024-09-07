@@ -1,5 +1,5 @@
 // for integer, just change string to vector<int> and minimum value of vector must be >= 1
-// for integer, lim will be the maximum valu of the array
+// for integer, lim will be the maximum value of the array
 array<vector<int>, 2> get_sa(string& s, int lim = 128) {
   int n = s.size() + 1, k = 0, a, b;
   vector<int> x(begin(s), end(s) + 1), y(n), sa(n), lcp(n), ws(max(n, lim)), rank(n);
