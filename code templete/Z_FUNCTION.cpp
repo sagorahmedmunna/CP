@@ -1,7 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-vector<int> get_z(string& s) { // 0 based
+// 0 based
+vector<int> get_z(string& s) {
   int n = s.size(), l = 0, r = 0;
   vector<int> z(n);
   z[0] = n;
