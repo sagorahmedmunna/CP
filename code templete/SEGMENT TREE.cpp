@@ -18,7 +18,7 @@ struct SegmentTree {
   SegmentTree(int n) { Initial(n); }
   SegmentTree(vector<int>& a) {
     Initial((int)a.size() - 1);
-    Build(1, 1, size, a);
+    Build(1, 0, size, a);
   }
   void Initial(int _n) {
     size = _n;
@@ -41,7 +41,7 @@ struct SegmentTree {
     return res;
   }
   void Build(int u, int s, int e, vector<int>& a) {
-    if (s == e) { #change
+    if (s == e) {
       st[u] = Make_node(a[s]);
       return;
     }
@@ -51,7 +51,7 @@ struct SegmentTree {
     st[u] = Merge(st[v], st[w]);
   }
   void Update(int u, int s, int e, int k, long long val) {
-    if (s == e) { #change
+    if (s == e) {
       st[u] = Make_node(val);
       return;
     }
@@ -61,7 +61,7 @@ struct SegmentTree {
     st[u] = Merge(st[v], st[w]);
   }
   void Update(int k, long long val) {
-    Update(1, 1, size, k, val);
+    Update(1, 0, size, k, val);
   }
   node Query(int u, int s, int e, int l, int r) {
     if (e < l || r < s) { #change
@@ -74,7 +74,7 @@ struct SegmentTree {
     return Merge(lsum, rsum);
   }
   node Query(int l, int r) {
-    return Query(1, 1, size, l, r);
+    return Query(1, 0, size, l, r);
   }
 };
  
