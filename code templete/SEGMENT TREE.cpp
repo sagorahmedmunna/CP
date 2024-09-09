@@ -3,14 +3,15 @@
 
 #include <bits/stdc++.h>
 using namespace std;
+
+struct node { #change
+  long long sum, pref, suff, ans;
+  node() {
+    sum = pref = suff = ans = 0;
+  }
+};
  
 struct SegmentTree {
-  struct node { #change
-    long long sum, pref, suff, ans;
-    node() {
-      sum = pref = suff = ans = 0;
-    }
-  };
   int size = 1;
   vector<node> st;
   SegmentTree() {}

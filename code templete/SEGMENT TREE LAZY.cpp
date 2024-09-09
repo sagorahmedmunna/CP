@@ -3,14 +3,15 @@
 
 #include <bits/stdc++.h>
 using namespace std;
+
+struct node { #change
+  long long sum, lazy_add;
+  node() {
+    sum = lazy_add = 0;
+  }
+};
  
 struct SegmentTreeLazy {
-  struct node { #change
-    long long sum, lazy_add;
-    node() {
-      sum = lazy_add = 0;
-    }
-  };
   int size = 1;
   vector<node> st;
   SegmentTreeLazy() {}
