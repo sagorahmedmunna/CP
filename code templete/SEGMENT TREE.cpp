@@ -51,7 +51,7 @@ struct SegmentTree {
     st[u] = Merge(st[v], st[w]);
   }
   void Update(int u, int s, int e, int k, long long val) {
-    if (s == e) {
+    if (s == e) { #change
       st[u] = Make_node(val);
       return;
     }
