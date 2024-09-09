@@ -23,7 +23,7 @@ struct SegmentTree {
   void Initial(int _n) {
     size = _n;
     int tree_size = 1;
-    while (tree_size < size) tree_size *= 2;
+    while (tree_size <= size) tree_size *= 2;
     st.resize(tree_size * 2);
   }
   node Make_node(int val) { #change

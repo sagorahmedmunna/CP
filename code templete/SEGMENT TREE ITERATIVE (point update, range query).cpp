@@ -16,7 +16,7 @@ template <class T> struct SegmentTreeIterative {
   void Initial(int _n) {
     n = _n;
     int tree_size = 1;
-    while (tree_size < n) tree_size *= 2;
+    while (tree_size <= n) tree_size *= 2;
     st.resize(tree_size * 2);
   }
   int neutral = INT_MAX; #change

@@ -4,10 +4,13 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+const long long INF = 1.1e17;
+
 struct node { #change
   long long sum, lazy_add;
   node() {
-    sum = lazy_add = 0;
+    sum = 0;
+    lazy_add = INF;
   }
 };
  
@@ -23,13 +26,13 @@ struct SegmentTreeLazy {
   void Initial(int _n) {
     size = _n;
     int tree_size = 1;
-    while (tree_size < size) tree_size *= 2;
+    while (tree_size <= size) tree_size *= 2;
     st.resize(tree_size * 2);
   }
   node Make_node(long long val) { #change
     node res;
     res.sum = val;
-    res.lazy_add = 0;
+    res.lazy_add = INF;
     return res;
   }
   node Merge(node& l, node& r) { #change
@@ -38,14 +41,16 @@ struct SegmentTreeLazy {
     return res;
   }
   void Push(int u, int l, int r) { #change
-    if (st[u].lazy_add == 0) return;
+    if (st[u].lazy_add == INF) return;
     if (l != r) {
       int v = 2 * u, w = 2 * u + 1;
-      st[v].lazy_add += st[u].lazy_add;
-      st[w].lazy_add += st[u].lazy_add;
+      if (st[v].lazy_add != INF) st[v].lazy_add += st[u].lazy_add;
+      else st[v].lazy_add = st[u].lazy_add;
+      if (st[w].lazy_add != INF) st[w].lazy_add += st[u].lazy_add;
+      else st[w].lazy_add = st[u].lazy_add;
     }
     st[u].sum += (r - l + 1) * st[u].lazy_add;
-    st[u].lazy_add = 0;
+    st[u].lazy_add = INF;
   }
   void Build(int u, int s, int e, vector<int>& a) {
     if (s == e) {
@@ -60,8 +65,9 @@ struct SegmentTreeLazy {
   void Update(int u, int s, int e, int l, int r, long long val) {
     Push(u, s, e);
     if (e < l || r < s) return;
-    if (l <= s && e <= r) {
-      st[u].lazy_add += val;
+    if (l <= s && e <= r) { #change
+      if (st[u].lazy_add != INF) st[u].lazy_add += val;
+      else st[u].lazy_add = val;
       Push(u, s, e);
       return;
     }
@@ -76,8 +82,7 @@ struct SegmentTreeLazy {
   node Query(int u, int s, int e, int l, int r) {
     Push(u, s, e);
     if (e < l || r < s) { #change
-      node mx = Make_node(0);
-      return mx;
+      return node();
     }
     if (l <= s && e <= r) return st[u];
     int v = 2 * u, w = 2 * u + 1, m = (s + e) / 2;
@@ -95,8 +100,7 @@ int main() {
   vector<int> a(n + 1);
   for (int i = 1; i <= n; i++) cin >> a[i];
  
-  SegmentTreeLazy sg(n);
-  sg.Build(a);
+  SegmentTreeLazy sg(a);
  
   while (q--) {
     int type; cin >> type;
