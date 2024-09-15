@@ -14,7 +14,7 @@ void update(int u, int s, int e, int k, int val) {
   else update(w, m + 1, e, k, val);
   st[u] = max(st[v], st[w]);
 }
- 
+
 int query(int u, int s, int e, int l, int r) {
   if (e < l || r < s) return 0;
   if (l <= s && e <= r) return st[u];

@@ -18,6 +18,7 @@ vector<array<long long, 2>> pw(MAX), ipw(MAX);
 array<long long, 2> bs = {137, 277};
 
 int BinExp(long long a, long long b, int mod) {
+  a %= mod;
   int res = 1;
   while (b) {
     if (b & 1) res = (res * a) % mod;
