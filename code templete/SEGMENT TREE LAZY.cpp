@@ -93,6 +93,20 @@ struct SegmentTreeLazy {
   node Query(int l, int r) {
     return Query(1, 0, size, l, r);
   }
+  int Idx_query(int u, int s, int e, int l, int r) {
+    Push(u, s, e);
+    if (e < l || r < s) return -1;
+    if (s == e) return st[u].mn == 0 ? s : -1;
+    int v = u << 1, w = v | 1, m = s + e >> 1;
+    int lq = Idx_query(v, s, m, l, r);
+    if (lq == -1) {
+      return Idx_query(w, m + 1, e, l, r);
+    }
+    return lq;
+  }
+  int Idx_query(int l, int r) {
+    return Idx_query(1, 0, size, l, r);
+  }
 };
  
 int main() {
