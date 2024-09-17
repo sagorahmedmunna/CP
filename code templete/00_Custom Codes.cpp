@@ -62,6 +62,8 @@ map<int, int, greater<int>>
 
 // fill with elements
 fill(v.begin(), v.end(), -1);
+// fill for array
+fill(&dp[0][0][0], &dp[0][0][0] + N * M * N, INF);
 
 // string to number
 stoi(num);
