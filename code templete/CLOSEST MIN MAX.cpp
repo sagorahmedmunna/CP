@@ -1,7 +1,7 @@
 // closest left, right index where current element is max or min
 // closest max or min element from the current element
 
-pair<vector<int>, vector<int>> closest_min_element(vector<int> &a) {
+array<vector<int>, 2> closest_min_element(vector<int> &a) {
   int n = a.size();
   vector<int> l(n), r(n);
   stack<int> st;
@@ -23,7 +23,7 @@ pair<vector<int>, vector<int>> closest_min_element(vector<int> &a) {
   return {l, r};
 }
 
-pair<vector<int>, vector<int>> closest_max_element(vector<int> &a) {
+array<vector<int>, 2> closest_max_element(vector<int> &a) {
   int n = a.size();
   vector<int> l(n), r(n);
   stack<int> st;
