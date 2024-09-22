@@ -47,6 +47,7 @@ struct Hashing {
   int n;
   vector<array<long long, 2>> hs;
   Hashing(string& s) {
+    if (pw[2][0] == 0) Preprocess();
     n = s.size();
     hs.resize(n + 1);
     for (int i = 0; i < n; i++) {
@@ -54,13 +55,14 @@ struct Hashing {
       hs[i + 1][1] = (hs[i][1] + (pw[i][1] * s[i]) % MOD[1]) % MOD[1];
     }
   }
-  long long get_hash(int l, int r) { // 0 based query
+  array<long long, 2> get_hash(int l, int r) { // 0 based query
     l++, r++; // 1 based hashing
     long long res1 = ((hs[r][0] - hs[l - 1][0]) + MOD[0]) % MOD[0];
     long long res2 = ((hs[r][1] - hs[l - 1][1]) + MOD[1]) % MOD[1];
     res1 = (res1 * ipw[l - 1][0]) % MOD[0];
     res2 = (res2 * ipw[l - 1][1]) % MOD[1];
-    return res1 << 31 | res2;
+    //return res1 << 31 | res2;
+    return {res1, res2};
   }
 };
 
@@ -77,7 +79,6 @@ int main() {
   
   string s, t; cin >> s >> t;
   int n = s.size(), m = t.size();
-  Preprocess();
   Hashing sh(s), th(t);
   auto [t1, t2] = th.get_hash(0, m - 1);
   int cnt = 0;
