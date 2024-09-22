@@ -1,3 +1,4 @@
+# https://ali-ibrahim137.github.io/competitive/programming/2020/08/23/Stress-Testing.html
 set -e
 GREEN='\033[0;32m'
 RED='\033[0;31m'
