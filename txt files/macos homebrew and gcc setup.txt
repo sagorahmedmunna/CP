@@ -1,7 +1,12 @@
 https://medium.com/@balajiyaswanth.v/competitive-programming-setup-on-mac-c-ca9d2a0d012e
 
-// for sublime run two commands
+brew install gcc
+// run this command to see the version
+brew list gcc
+cd /opt/homebrew/bin/
+ln -s g++-<your_version> g++
 
+// for sublime run two commands
 brew install gcc
 brew install coreutils
 
