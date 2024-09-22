@@ -4,6 +4,15 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+const int N = (int)2e5 + 9;
+int lg[N];
+
+void Preprocess() {
+  for (int i = 2; i < N; ++i) {
+    lg[i] = lg[i / 2] + 1;
+  }
+}
+
 template <class T> struct RMQ {
   int n = 1, LOG = 1;
   vector<vector<T>> st;
@@ -12,6 +21,7 @@ template <class T> struct RMQ {
   }
   RMQ() {}
   RMQ(vector<T>& a) {
+    if (lg[2] == 0) Preprocess();
     n = (int)a.size(), LOG = __lg(n) + 1;
     st.assign(n, vector<T> (LOG));
     for (int j = 0; j < LOG; j++) {
@@ -22,8 +32,8 @@ template <class T> struct RMQ {
     }
   }
   T Query(int l, int r) {
-    int log = __lg(r - l + 1);
-    return Merge(st[l][log], st[r - (1 << log) + 1][log]);
+    int k = lg[r - l + 1];
+    return Merge(st[l][k], st[r - (1 << k) + 1][k]);
   }
 };
 
