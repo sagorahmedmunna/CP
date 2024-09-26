@@ -48,6 +48,18 @@ struct DFS {
     }
     return u;
   }
+  int lca(int u, int v) {
+    if (is_ancestor(u, v)) return u;
+    for (int i = k - 1; i >= 0; i--) {
+      if (!is_ancestor(parent[u][i], v)) {
+        u = parent[u][i];
+      }
+    }
+    return parent[u][0];
+  }
+  int dis(int u, int v) {
+    return depth[u] + depth[v] - 2 * depth[lca(u, v)];
+  }
 };
 
 int main() {
