@@ -17,7 +17,7 @@ bool topological_sort(vector<vector<int>>& adj) {
   vector<int> order;
   while (!q.empty()) {
     # change the queue operation
-    int u = q.pop();
+    int u = q.front();
     q.pop();
     for (auto& v : adj[u]) {
       in_degree[v]--;
