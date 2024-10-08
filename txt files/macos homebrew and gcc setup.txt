@@ -1,4 +1,8 @@
+// full link
 https://medium.com/@balajiyaswanth.v/competitive-programming-setup-on-mac-c-ca9d2a0d012e
+
+// install homebrew, copy and paste
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 brew install gcc
 // run this command to see the version
@@ -12,7 +16,7 @@ brew install coreutils
 
 // build this in sublime
 {
-  "cmd" : ["g++-13 $file_name -o $file_base_name && gtimeout 4s ./$file_base_name<input.in>output.out"], 
+  "cmd" : ["g++-14 $file_name -o $file_base_name && gtimeout 6s ./$file_base_name<input.txt>output.txt"], 
   "selector" : "source.c",
   "shell": true,
   "working_dir" : "$file_path"
