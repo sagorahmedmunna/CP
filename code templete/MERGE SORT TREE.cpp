@@ -22,7 +22,7 @@ struct MergeSortTree {
   void Initial(int _n) {
     size = _n;
     int tree_size = 1;
-    while (tree_size < n) tree_size *= 2;
+    while (tree_size < _n) tree_size *= 2;
     st.resize(tree_size * 2);
   }
   void Build(int u, int s, int e, vector<int>& a) {
