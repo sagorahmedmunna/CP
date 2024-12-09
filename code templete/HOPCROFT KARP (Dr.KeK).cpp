@@ -1,5 +1,6 @@
 // Dr.KeK (1 based)
 // add_edge(u, v) -> u = left graph, r = right graph
+// O(√V * E)
 struct HopcroftKarp {
   int n, m;
   vector<vector<int>> graph;

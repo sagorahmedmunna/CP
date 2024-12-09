@@ -1,8 +1,8 @@
+// O(√V * E)
 const int N = 2e5 + 9;
 const int INF = 1e8 + 5;
 vector<int> g[N]; 
 int n, match[N], dist[N];
-
 bool bfs() {
   queue<int> q; 
   for (int i = 1; i <= n; ++i) {
@@ -22,7 +22,6 @@ bool bfs() {
   } 
   return dist[0] != INF;    
 }
-
 bool dfs (int u) {
   if (!u) return 1; 
   for (int v : g[u]) {
@@ -34,7 +33,6 @@ bool dfs (int u) {
   dist[u] = INF;
   return 0;
 }
-
 int max_matching() {
   int ret = 0; 
   while (bfs()) {
