@@ -1,5 +1,5 @@
 freopen("input.in", "r", stdin);
-freopen("output.in", "w", stdout);
+freopen("output.out", "w", stdout);
 ios_base::sync_with_stdio(0), cin.tie(0);
 
 // pragma
