@@ -10,6 +10,8 @@ ios_base::sync_with_stdio(0), cin.tie(0);
 #pragma GCC target ("bmi,bmi2,lzcnt,popcnt")
 #pragma GCC target ("sse,sse2,sse3,ssse3,sse4,abm,mmx")
 
+const double PI = acos((double)-1.0);
+
 // random number generator
 mt19937_64 rng(chrono::steady_clock::now().time_since_epoch().count());
 int num = rng() % limit;
