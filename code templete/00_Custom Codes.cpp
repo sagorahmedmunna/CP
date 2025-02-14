@@ -93,6 +93,11 @@ __builtin_popcountll(x)
 __builtin_clzll(x)
 __builtin_ctzll(x)
 
+// distance of two points
+ll Dis(ll x1, ll y1, ll x2, ll y2) {
+	return ((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1));
+}
+
 // a point inside cricle
 // x1, y1 = point of circle, r = radius of circle
 // x2, y2 = target point
