@@ -10,8 +10,6 @@ ios_base::sync_with_stdio(0), cin.tie(0);
 #pragma GCC target ("bmi,bmi2,lzcnt,popcnt")
 #pragma GCC target ("sse,sse2,sse3,ssse3,sse4,abm,mmx")
 
-const double PI = acos((double)-1.0);
-
 // random number generator
 mt19937_64 rng(chrono::steady_clock::now().time_since_epoch().count());
 int num = rng() % limit;
@@ -92,15 +90,3 @@ n ^ (1 << i)
 __builtin_popcountll(x)
 __builtin_clzll(x)
 __builtin_ctzll(x)
-
-// distance of two points
-ll Dis(ll x1, ll y1, ll x2, ll y2) {
-	return ((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1));
-}
-
-// a point inside cricle
-// x1, y1 = point of circle, r = radius of circle
-// x2, y2 = target point
-bool isInside(int x1, int y1, int x2, int y2, int r) {
-	return ((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1)) <= r * r;
-}
