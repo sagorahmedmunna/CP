@@ -11,8 +11,8 @@ template <class T> using ordered_multiset = tree<T, null_type, greater_equal<T>,
 template <class T, class R> using ordered_map = tree<T, R, greater<T>, rb_tree_tag, tree_order_statistics_node_update>;
 
 // Fucntions
-order_of_key(k); // Gives the count of elements smaller than k. — O(log n)
-find_by_order(k); // Returns the iterator for the kth element (0 based index). — O(log n)
+st.order_of_key(k); // Gives the count of elements smaller than k. — O(log n)
+st.find_by_order(k); // Returns the iterator for the kth element (0 based index). — O(log n)
 // To remove an element in a multiset, you must delete it using iterators:
 st.erase(st.find_by_order(st.order_of_key(x)));
 // ordered_multiset erase
