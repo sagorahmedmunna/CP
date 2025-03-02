@@ -2,9 +2,35 @@ const double PI = acos((double)-1.0);
 using ld = long double;
 using ll = long long;
 
+struct point { ld x, y; };
+
+// determines the relative position (cross product) of a point (p3) 
+// with respect to the line passing through (p1) and (p2)
+// if (d > 0): point (p3) is to the left of the line
+// if (d < 0): point (p3) is to the right of the line
+// if (d == 0): point (p3) lies exactly on the line.
+ll determinant(point p1, point p2, point p3) {
+  ll d = (p2.x - p1.x) * (p3.y - p1.y) - (p2.y - p1.y) * (p3.x - p1.x);
+  return d;
+}
+
+bool arePointsOnSameSide(point p1, point p2, point p3, point p4) {
+  ll d1 = determinant(p1, p2, p3);
+  ll d2 = determinant(p1, p2, p4);
+  return (d1 * d2) > 0;
+}
+
+bool doLinesIntersect(point p1, point p2, point p3, point p4) {
+  ll d1 = determinant(p3, p4, p1);
+  ll d2 = determinant(p3, p4, p2);
+  ll d3 = determinant(p1, p2, p3);
+  ll d4 = determinant(p1, p2, p4);
+  return (d1 * d2 < 0) && (d3 * d4 < 0);
+}
+
 // distance of two points
-ld Dis(ld x1, ld y1, ld x2, ld y2) {
-  return sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+ld distance(point p1, point p2) {
+  return sqrt((p2.x - p1.x) * (p2.x - p1.x) + (p2.y - p1.y) * (p2.y - p1.y));
 }
 
 // a point inside cricle
