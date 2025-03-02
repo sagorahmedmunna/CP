@@ -4,6 +4,20 @@ using ll = long long;
 
 struct point { ld x, y; };
 
+void manhattanToChebychev(int& x, int& y) {
+  int X = x + y, Y = x - y;
+  x = X, y = Y;
+}
+void chebyshevToManhattan(int& x, int& y) {
+  int X = (x + y) / 2, Y = (x - y) / 2;
+  x = X, y = Y;
+}
+ll manhattanDistance(point& p1, point& p2) {
+  return abs(p1.x - p2.x) + abs(p1.y - p2.y);
+}
+ll chebyshevDistance(point& p1, point& p2) {
+  return max(abs(p1.x - p2.x), abs(p1.y - p2.y));
+}
 // determines the relative position (cross product) of a point (p3) 
 // with respect to the line passing through (p1) and (p2)
 // if (d > 0): point (p3) is to the left of the line
@@ -13,13 +27,11 @@ ll determinant(point p1, point p2, point p3) {
   ll d = (p2.x - p1.x) * (p3.y - p1.y) - (p2.y - p1.y) * (p3.x - p1.x);
   return d;
 }
-
 bool arePointsOnSameSide(point p1, point p2, point p3, point p4) {
   ll d1 = determinant(p1, p2, p3);
   ll d2 = determinant(p1, p2, p4);
   return (d1 * d2) > 0;
 }
-
 bool doLinesIntersect(point p1, point p2, point p3, point p4) {
   ll d1 = determinant(p3, p4, p1);
   ll d2 = determinant(p3, p4, p2);
@@ -27,12 +39,10 @@ bool doLinesIntersect(point p1, point p2, point p3, point p4) {
   ll d4 = determinant(p1, p2, p4);
   return (d1 * d2 < 0) && (d3 * d4 < 0);
 }
-
 // distance of two points
-ld distance(point p1, point p2) {
+ld distance(point& p1, point& p2) {
   return sqrt((p2.x - p1.x) * (p2.x - p1.x) + (p2.y - p1.y) * (p2.y - p1.y));
 }
-
 // a point inside cricle
 // x1, y1 = point of circle, r = radius of circle
 // x2, y2 = target point
