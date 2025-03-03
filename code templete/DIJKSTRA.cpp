@@ -4,14 +4,15 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-const long long INF = 1.1e17;
+using ll = long long;
+const ll INF = 1.1e17;
 
-vector<long long> Dijkstra(int source, vector<vector<array<long long, 2>>>& adj) {
+vector<ll> Dijkstra(vector<vector<array<ll, 2>>>& adj, int source = 1) {
   int n = (int)adj.size();
-  vector<long long> dis(n, INF);
+  vector<ll> dis(n, INF);
   vector<bool> vis(n);
   dis[source] = 0;
-  priority_queue<array<long long, 2>, vector<array<long long, 2>>, greater<array<long long, 2>>> pq;
+  priority_queue<array<ll, 2>, vector<array<ll, 2>>, greater<array<ll, 2>>> pq;
   pq.push({0, source});
   while (!pq.empty()) {
     auto [d, u] = pq.top();
@@ -41,7 +42,7 @@ int main() {
     // #for undirected
     //adj[v].push_back({u, c});
   }
-  auto dis = Dijkstra(1, adj);
+  auto dis = Dijkstra(adj);
   for (int i = 1; i <= n; i++) {
     cout << dis[i] << ' ';
   }
