@@ -27,7 +27,6 @@ merge(a.begin(), a.end(), b.begin(), b.end(), c.begin());
 set<int> a = {3, 2, 1}, b = {4, 5, 1};
 set<int> c;
 merge(a.begin(), a.end(), b.begin(), b.end(), inserter(c, c.begin()));
-for (auto& i : c) cout << i << ' ';
 
 // tuple
 tuple<int, int, int> tup = {1, 2, 3};
