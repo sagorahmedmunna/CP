@@ -1,4 +1,6 @@
 // O(√V * E)
+// 1 to n is left graph, n + 1 to n + n is right graph
+// make directed edges
 const int N = 2e5 + 9;
 const int INF = 1e8 + 5;
 vector<int> g[N]; 
