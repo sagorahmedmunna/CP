@@ -19,7 +19,7 @@ template <class T> struct SegmentTreeIterative {
     while (tree_size <= n) tree_size *= 2;
     st.resize(tree_size * 2);
   }
-  int neutral = INT_MAX; #change
+  T neutral = INT_MAX; #change
   T Merge(T& a, T& b) { #change
     return min(a, b);
   }
