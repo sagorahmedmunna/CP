@@ -25,7 +25,6 @@ struct Trie {
     }
     it->word_cnt++;
   }
-  // returns the count of string
   int find(string& s) {
     node* it = root;
     for (auto& si : s) {
@@ -76,4 +75,66 @@ int cnt_pref(string& s) {
     u = nxt[u][idx];
   }
   return cnt[u];
+}
+void erase(string& s) {
+  if (cnt_pref(s) == 0) return;
+  int u = 1;
+  for (auto& c : s) {
+    int idx = c - 'a';
+    int v = nxt[u][idx];
+    if(--cnt[v] == 0) {
+      nxt[u][idx] = 0 ;
+      return;
+    }
+    u = v;
+  }
+}
+
+// trie integer iterative (max xor)
+const int N = 7e6 + 9, A = 2;
+int nxt[N][A], cnt[N], node = 2;
+void add_int(int num) {
+  int u = 1;
+  for (int bit = 30; bit >= 0; bit--) {
+    int idx = (num >> bit) & 1;
+    if (!nxt[u][idx]) nxt[u][idx] = node++;
+    u = nxt[u][idx];
+    cnt[u]++;
+  }
+}
+int int_cnt(int num) {
+  int u = 1;
+  for (int bit = 30; bit >= 0; bit--) {
+    int idx = (num >> bit) & 1;
+    if (!nxt[u][idx]) return 0;
+    u = nxt[u][idx];
+  }
+  return cnt[u];
+}
+void erase_int(int num) {
+  if (int_cnt(num) == 0) return;
+  int u = 1;
+  for(int bit = 30; bit >= 0; bit--) {
+    int idx = (num >> bit) & 1;
+    int v = nxt[u][idx];
+    if(--cnt[v] == 0) {
+      nxt[u][idx] = 0 ;
+      return;
+    }
+    u = v;
+  }
+}
+int max_xor(int num) {
+  int res = 0, u = 1;
+  for (int bit = 30; bit >= 0; bit--) {
+    int idx = (num >> bit) & 1;
+    int flip = idx ^ 1;
+    if (nxt[u][flip] && cnt[nxt[u][flip]]) {
+      res += (1 << bit);
+      u = nxt[u][flip];
+    } else {
+      u = nxt[u][idx];
+    }
+  }
+  return res;
 }
