@@ -1,6 +1,6 @@
 const int N = 1e6 + 9;
 vector<int> lpf(N), gpf(N);
-map<int, int> factors[N];
+vector<array<int, 2>> factors[N];
 
 // sieve for finding lowest prime and highest prime upto N
 for (int i = 2; i < N; i++) {
@@ -15,8 +15,12 @@ for (int i = 2; i < N; i++) {
 for (int i = 2; i < N; i++) {
   int num = i;
   while (num > 1) {
-    factors[i][lpf[num]]++;
-    num /= lpf[num];
+    int p = lpf[num], cnt = 0;
+    while (num > 1 && num % p == 0) {
+      cnt++;
+      num /= p;
+    }
+    factors[i].push_back({p, cnt});
   }
 }
 int num = 10;
