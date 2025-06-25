@@ -86,7 +86,7 @@ int main() {
   return 0;
 }
 
-// # with update, find palindrome
+// # with update, find palindrome O(nlogn)
 const int N = 1e6 + 9;
 int power(long long n, long long k, const int mod) {
   int ans = 1 % mod;

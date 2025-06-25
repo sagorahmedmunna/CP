@@ -28,7 +28,6 @@ array<vector<int>, 2> get_sa(string& s, int lim = 128) {
   O(|S| + |alphabet|) Suffix Array
   LIM := max{s[i]} + 2
 */
-
 void inducedSort (const vector <int> &vec, int val_range, vector <int> &SA, const vector <int> &sl, const vector <int> &lms_idx) {
   vector <int> l(val_range, 0), r(val_range, 0);
   for (int c : vec) {
@@ -46,7 +45,6 @@ void inducedSort (const vector <int> &vec, int val_range, vector <int> &SA, cons
     if (i and !sl[i - 1]) SA[--r[vec[i - 1]]] = i - 1;
   }
 }
-
 vector <int> suffixArray (const vector <int> &vec, int val_range) {
   const int n = vec.size();
   vector <int> sl(n), SA(n), lms_idx;
@@ -84,14 +82,12 @@ vector <int> suffixArray (const vector <int> &vec, int val_range) {
   }
   inducedSort(vec, val_range, SA, sl, new_lms_idx); return SA;
 }
-
-vector <int> getSuffixArray (const string &s, const int LIM = 128) {
+vector <int> getSuffixArray (const string &s, const int LIM = 128) { // change limit for integer array
   vector <int> vec(s.size() + 1);
   copy(begin(s), end(s), begin(vec)); vec.back() = '$';
   auto ret = suffixArray(vec, LIM);
   ret.erase(ret.begin()); return ret;
 }
-
 // build RMQ on it to get LCP of any two suffix
 vector <int> getLCParray (const string &s, const vector <int> &SA) {
   int n = s.size(), k = 0;
