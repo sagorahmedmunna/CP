@@ -30,6 +30,7 @@ template <class T> struct RMQ {
     }
   }
   T Query(int l, int r) {
+    // if (l > r) return 0;
     int k = lg[r - l + 1];
     return Merge(st[l][k], st[r - (1 << k) + 1][k]);
   }
