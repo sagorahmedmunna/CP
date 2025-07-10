@@ -78,7 +78,6 @@ binary.erase(0, binary.find_first_not_of('0'));
 
 // count digit
 int d = log10(num) + 1;
-
 // set ith bit
 n | (1 << i)
 // unset ith bit

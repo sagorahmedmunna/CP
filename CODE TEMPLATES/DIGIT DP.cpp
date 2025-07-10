@@ -25,8 +25,6 @@ int f(int i, int cnt, int tight, int started) {
   }
   return ret;
 }
-*/
-
 
 #2 countWithExactDigitCount // f(0, 0, 1, 0)
 int dp[11][11][2][2];
