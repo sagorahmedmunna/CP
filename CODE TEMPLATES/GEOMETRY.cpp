@@ -81,6 +81,12 @@ struct Circle {
 // triangle with three sides: a, b, c
 struct Triangle {
   ld a, b, c, s;
+  Triangle(point x, point y, point z) {
+    a = distance(x, y);
+    b = distance(y, z);
+    c = distance(z, x);
+    s = (a + b + c) / 2;
+  }
   Triangle(ld _a, ld _b, ld _c) {
     a = _a, b = _b, c = _c;
     s = (a + b + c) / 2;
