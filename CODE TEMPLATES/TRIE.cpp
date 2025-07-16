@@ -58,7 +58,7 @@ struct Trie {
 // iterative
 const int N = 1e6 + 9, A = 26;
 int nxt[N][A], pref_cnt[N], word_cnt[N], node = 2;
-void add(string& s) {
+void insert(string& s) {
   int u = 1;
   for (auto& c : s) {
     int idx = c - 'a';
@@ -68,7 +68,7 @@ void add(string& s) {
   }
   word_cnt[u]++;
 }
-int cnt_pref(string& s) {
+int countPref(string& s) {
   int u = 1;
   for (auto& c : s) {
     int idx = c - 'a';
@@ -103,7 +103,7 @@ void erase(string& s) {
 // trie integer iterative (max xor)
 const int N = 2e5 * 31 + 9, A = 2;
 int nxt[N][A], pref_cnt[N], int_cnt[N], node = 2;
-void add_int(int num) {
+void insert(int num) {
   int u = 1;
   for (int bit = 30; bit >= 0; bit--) {
     int idx = (num >> bit) & 1;
@@ -122,7 +122,7 @@ int find(int num) {
   }
   return int_cnt[u];
 }
-void erase_int(int num) {
+void erase(int num) {
   if (find(num) == 0) return;
   int u = 1;
   for(int bit = 30; bit >= 0; bit--) {
@@ -135,7 +135,7 @@ void erase_int(int num) {
     u = v;
   }
 }
-int max_xor(int num) {
+int maxXor(int num) {
   int res = 0, u = 1;
   for (int bit = 30; bit >= 0; bit--) {
     int idx = (num >> bit) & 1;
