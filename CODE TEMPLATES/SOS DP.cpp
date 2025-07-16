@@ -1,6 +1,10 @@
 const int mod = 1e9 + 7;
 const int B = 20, N = (1 << B) + 9;
 int f[N], g[N], pairF[N], pairG[N], subseqF[N], subseqG[N], Pow2[N];
+void sub(int& a, int& b) { // a = a - b
+  a -= b;
+  if (a < 0) a += mod;
+}
 int nC2(int n) {
   return (n * 1LL * (n - 1) / 2) % mod;
 }
@@ -18,8 +22,8 @@ void backward1() { // exclude sebset sum
     for (int i = N - 1; i >= 0; i--) {
       if (i & (1 << bit)) {
         // f[i] -= f[i ^ (1 << bit)];
-        pairF[i] -= pairF[i ^ (1 << bit)];
-        subseqF[i] -= subseqF[i ^ (1 << bit)];
+        sub(pairF[i], pairF[i ^ (1 << bit)]);
+        sub(subseqF[i], subseqF[i ^ (1 << bit)]);
       }
     }
   }
@@ -38,8 +42,8 @@ void backward2() { // exclude superset sum
     for (int i = 0; i < N; i++) {
       if (i & (1 << bit)) {
         // g[i ^ (1 << bit)] -= g[i];
-        pairG[i ^ (1 << bit)] -= pairG[i];
-        subseqG[i ^ (1 << bit)] -= subseqG[i];
+        sub(pairG[i ^ (1 << bit)], pairG[i]);
+        sub(subseqG[i ^ (1 << bit)], subseqG[i]);
       }
     }
   }
