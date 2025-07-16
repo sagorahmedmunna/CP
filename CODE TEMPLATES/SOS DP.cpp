@@ -1,5 +1,5 @@
 const int mod = 1e9 + 7;
-const int N = 1e6 + 9, B = 20;
+const int B = 20, N = (1 << B) + 9;
 int f[N], g[N], pairF[N], pairG[N], subseqF[N], subseqG[N], Pow2[N];
 int nC2(int n) {
   return (n * 1LL * (n - 1) / 2) % mod;
