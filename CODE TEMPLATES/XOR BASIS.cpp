@@ -63,6 +63,23 @@ struct XorBasis {
   ll kthLargestXor(ll k) {
     return kthXor(countDistinctXors() - 1 - k);
   }
+  ll kthXorAllCombinations(ll k) {
+    if (n - sz > 60) return kthXor(1);
+    ll totComb = 1LL << n;
+    ll disComb = countDistinctXors();
+    ll dupPerDis = totComb / disComb;    
+    ll disIdx = (k - 1) / dupPerDis + 1;
+    return kthXor(disIdx);
+  }
+  ll kthLargestXorAllCombinations(ll k) {
+    if (n - sz > 60) return kthXor(countDistinctXors());
+    ll totComb = 1LL << n;
+    ll disComb = countDistinctXors();
+    ll dupPerDis = totComb / disComb;    
+    ll disIdx = (k - 1) / dupPerDis + 1;
+    ll desIdx = disComb - disIdx + 1;
+    return kthXor(desIdx);
+  }
   ll countSubsetsLessThan(ll x) {
     ll lo = 0, hi = countDistinctXors();
     while (lo <= hi) {
