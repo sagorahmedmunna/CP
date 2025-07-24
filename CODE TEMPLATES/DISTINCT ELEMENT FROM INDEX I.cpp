@@ -1,4 +1,5 @@
 // 0 based
+// count of distinct element from index i to left and right
 array<vector<int>, 2> distinctElementFromI(vector<int>& a) {
   int n = a.size(), mxidx = -1;
   map<int, int> mp;
