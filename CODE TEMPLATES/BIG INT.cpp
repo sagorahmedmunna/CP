@@ -1,5 +1,5 @@
 /*
-    string a, b; |a| <= 10 ^ 5
+    string a, b; |a| <= 10 ^ 6
     a + b
     a - b
     a * b
