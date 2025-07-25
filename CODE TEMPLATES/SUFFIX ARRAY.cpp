@@ -132,6 +132,6 @@ int find_occurrence(string& s, string& t, vector<int>& sa) {
 }
 int main() {
   string s;
-  auto sa = getSuffixArray(sa);
+  auto sa = getSuffixArray(s);
   auto lcp = getLCParray(s, sa);
 }
