@@ -108,8 +108,7 @@ vector<int> getLCParray(const string& s, const vector<int>& SA) {
   lcp[n - 1] = 0; return lcp;
 }
 int lower_bound(string& s, string& t, vector<int>& sa) {
-  int n = s.size(), m = t.size();
-  int lo = 0, hi = n - 1;
+  int n = s.size(), m = t.size(), lo = 0, hi = n - 1;
   while (lo <= hi) {
     int mid = (lo + hi) / 2;
     if (s.substr(sa[mid], m) < t) lo = mid + 1;
@@ -118,8 +117,7 @@ int lower_bound(string& s, string& t, vector<int>& sa) {
   return lo;
 }
 int upper_bound(string& s, string& t, vector<int>& sa) {
-  int n = s.size(), m = t.size();
-  int lo = 0, hi = n - 1;
+  int n = s.size(), m = t.size(), lo = 0, hi = n - 1;
   while (lo <= hi) {
     int mid = (lo + hi) / 2;
     if (s.substr(sa[mid], m) <= t) lo = mid + 1;
