@@ -86,7 +86,7 @@ vector<int> suffixArray(const vector<int>& vec, int val_range) {
   }
   inducedSort(vec, val_range, SA, sl, new_lms_idx); return SA;
 }
-vector<int> getSuffixArray(const string& s, const int LIM = 128) { // change limit for integer array
+vector<int> getSuffixArray(const string& s, const int LIM = 128) { // change limit for integer array, (integer > 0)
   vector<int> vec(s.size() + 1);
   copy(begin(s), end(s), begin(vec)); vec.back() = '!';
   auto ret = suffixArray(vec, LIM);
@@ -107,16 +107,6 @@ vector<int> getLCParray(const string& s, const vector<int>& SA) {
   }
   lcp[n - 1] = 0; return lcp;
 }
-int upper_bound(string& s, string& t, vector<int>& sa) {
-  int n = s.size(), m = t.size();
-  int lo = 0, hi = n - 1;
-  while (lo <= hi) {
-    int mid = (lo + hi) / 2;
-    if (s.substr(sa[mid], m) <= t) lo = mid + 1;
-    else hi = mid - 1;
-  }
-  return lo;
-}
 int lower_bound(string& s, string& t, vector<int>& sa) {
   int n = s.size(), m = t.size();
   int lo = 0, hi = n - 1;
@@ -127,6 +117,21 @@ int lower_bound(string& s, string& t, vector<int>& sa) {
   }
   return lo;
 }
+int upper_bound(string& s, string& t, vector<int>& sa) {
+  int n = s.size(), m = t.size();
+  int lo = 0, hi = n - 1;
+  while (lo <= hi) {
+    int mid = (lo + hi) / 2;
+    if (s.substr(sa[mid], m) <= t) lo = mid + 1;
+    else hi = mid - 1;
+  }
+  return lo;
+}
 int find_occurrence(string& s, string& t, vector<int>& sa) {
   return upper_bound(s, t, sa) - lower_bound(s, t, sa);
+}
+int main() {
+  string s;
+  auto sa = getSuffixArray(sa);
+  auto lcp = getLCParray(s, sa);
 }
