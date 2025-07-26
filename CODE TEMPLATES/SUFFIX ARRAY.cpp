@@ -148,9 +148,36 @@ string kthSubstringDistinct(string& s, int64_t k, vector<int>& sa, vector<int>& 
   auto [i, len] = kthSubstringDistinctPos(s, k, sa, lcp);
   return s.substr(sa[i], len);
 }
+int64_t pref[N];
+void kthSubstringPreprocess(vector<int>& sa) {
+  int n = sa.size();
+  for (int i = 0; i < n; i++) {
+    pref[i] = n - sa[i];
+    if (i) pref[i] += pref[i - 1];
+  }
+}
+string kthSubstring(string& s, int64_t k, vector<int>& sa, vector<int>& lcp) {
+  int n = s.size();
+  int64_t lo = 1, hi = distPref[n - 1];
+  while (lo <= hi) {
+    int64_t mid = (lo + hi) >> 1;
+    auto [i, len] = kthSubstringDistinctPos(s, mid, sa, lcp);
+    int64_t totCnt = (i == 0 ? 0 : pref[i - 1]) + len;
+    int mn = len;
+    for (int j = i; j < n; j++) {
+      mn = min(mn, lcp[j]);
+      if (mn == 0) break;
+      totCnt += mn;
+    }
+    if (totCnt < k) lo = mid + 1;
+    else hi = mid - 1;
+  }
+  return kthSubstringDistinct(s, lo, sa, lcp);
+}
 int main() {
   string s;
   auto sa = getSuffixArray(s);
   auto lcp = getLCParray(s, sa);
   kthSubstringDistinctPreprocess(sa, lcp);
+  kthSubstringPreprocess(sa);
 }
