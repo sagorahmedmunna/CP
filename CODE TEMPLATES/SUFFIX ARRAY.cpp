@@ -128,6 +128,23 @@ int upper_bound(string& s, string& t, vector<int>& sa) {
 int find_occurrence(string& s, string& t, vector<int>& sa) {
   return upper_bound(s, t, sa) - lower_bound(s, t, sa);
 }
+const int N = 1e6 + 9;
+int64_t distPref[N];
+void kthSubstringDistinctPreprocess(vector<int>& sa, vector<int>& lcp) {
+  int last = 0, n = sa.size();
+  for (int i = 0; i < n; i++) {
+    distPref[i] = n - sa[i] - last;
+    if (i) distPref[i] += distPref[i - 1];
+    last = lcp[i];
+  }
+}
+string kthSubstringDistinct(string& s, int64_t k, vector<int>& sa, vector<int>& lcp) {
+  int n = s.size();
+  k--;
+  int i = upper_bound(distPref, distPref + n, k) - distPref;
+  int len = k - (i == 0 ? 0 : distPref[i - 1]) + (i == 0 ? 0 : lcp[i - 1]) + 1;
+  return s.substr(sa[i], len);
+}
 int main() {
   string s;
   auto sa = getSuffixArray(s);
