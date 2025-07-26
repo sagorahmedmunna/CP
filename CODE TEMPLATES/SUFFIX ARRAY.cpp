@@ -139,8 +139,7 @@ void kthSubstringDistinctPreprocess(vector<int>& sa, vector<int>& lcp) {
   }
 }
 string kthSubstringDistinct(string& s, int64_t k, vector<int>& sa, vector<int>& lcp) {
-  int n = s.size();
-  k--;
+  int n = s.size(); k--;
   int i = upper_bound(distPref, distPref + n, k) - distPref;
   int len = k - (i == 0 ? 0 : distPref[i - 1]) + (i == 0 ? 0 : lcp[i - 1]) + 1;
   return s.substr(sa[i], len);
