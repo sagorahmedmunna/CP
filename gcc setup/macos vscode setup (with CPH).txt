@@ -1,0 +1,13 @@
+step 1: setup gcc with all the steps given in the 'gcc setup file'
+
+step 2: change compiler path to
+-> /opt/homebrew/bin/g++-15
+(g++-<your version>)
+
+step 3: change IntelliSense mode
+-> macos-gcc-arm64
+
+step 4: if you are using CPH extention (Competitive Programming Helper)
+go to the settings, change cpp command to
+-> g++-15
+(g++-<your version>)

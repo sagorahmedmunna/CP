@@ -1,0 +1,7 @@
+// sublime build
+{
+  "cmd" : ["g++-15 $file_name -o $file_base_name && gtimeout 6s ./$file_base_name<input.txt>output.txt"], 
+  "selector" : "source.c",
+  "shell": true,
+  "working_dir" : "$file_path"
+}
