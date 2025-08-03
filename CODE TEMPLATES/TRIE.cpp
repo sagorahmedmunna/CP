@@ -92,12 +92,10 @@ void erase(string& s) {
   for (auto& c : s) {
     int idx = c - 'a';
     int v = nxt[u][idx];
-    if(--pref_cnt[v] == 0) {
-      nxt[u][idx] = 0 ;
-      return;
-    }
+    pref_cnt[v][idx]--;
     u = v;
   }
+  word_cnt[u]--;
 }
 
 // trie integer iterative (max xor)
@@ -128,12 +126,10 @@ void erase(int num) {
   for(int bit = 30; bit >= 0; bit--) {
     int idx = (num >> bit) & 1;
     int v = nxt[u][idx];
-    if(--pref_cnt[v] == 0) {
-      nxt[u][idx] = 0 ;
-      return;
-    }
+    pref_cnt[v]--;
     u = v;
   }
+  int_cnt[u]--;
 }
 int maxXor(int num) {
   int res = 0, u = 1;
