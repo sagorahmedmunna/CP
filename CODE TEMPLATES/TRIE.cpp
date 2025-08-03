@@ -98,7 +98,7 @@ void erase(string& s) {
   word_cnt[u]--;
 }
 
-// trie integer iterative (max xor)
+// trie integer iterative (max xor, min xor)
 const int N = 2e5 * 31 + 9, A = 2;
 int nxt[N][A], pref_cnt[N], int_cnt[N], node = 2;
 void insert(int num) {
@@ -141,6 +141,19 @@ int maxXor(int num) {
       u = nxt[u][flip];
     } else {
       u = nxt[u][idx];
+    }
+  }
+  return res;
+}
+int minXor(int num) {
+  int res = 0, u = 1;
+  for (int bit = 30; bit >= 0; bit--) {
+    int idx = (num >> bit) & 1;
+    if (nxt[u][idx] && pref_cnt[nxt[u][idx]]) {
+      u = nxt[u][idx];
+    } else {
+      res += (1 << bit);
+      u = nxt[u][idx ^ 1];
     }
   }
   return res;
