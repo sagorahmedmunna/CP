@@ -2,11 +2,11 @@
 using namespace std;
 
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
-const int N = 2e5 + 9;
-
-int rnd(int l, int r){
-  return l + rng() % (r - l + 1);
+int64_t rnd(int64_t l, int64_t r) { // can handle negative range also
+  if (l > r) swap(l, r);
+  return l + (rng() % (r - l + 1));
 }
+
 int main() {
   int t = 1000;
   cout << t << '\n';
