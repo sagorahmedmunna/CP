@@ -13,6 +13,10 @@ ios_base::sync_with_stdio(0), cin.tie(0);
 // random number generator
 mt19937_64 rng(chrono::steady_clock::now().time_since_epoch().count());
 int num = rng() % limit;
+int64_t rnd(int64_t l, int64_t r) { // can handle negative range also
+  if (l > r) swap(l, r);
+  return l + (rng() % (r - l + 1));
+}
 
 // ignore white space
 cin.ignore(); or cin >> ws;
