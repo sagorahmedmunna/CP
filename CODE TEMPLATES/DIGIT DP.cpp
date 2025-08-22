@@ -210,7 +210,7 @@ int f(int i, int rem, int tight, int started) {
   return ret;
 }
 
---> find sum and conunt at same time
+--> find sum of integers and conunt at same time
 #12 sum and count of all numbers x that has at most k distinct digits // f(0, 0, 1, 0)
 const int mod = 998244353;
 int64_t n, k, Pow10[20];
@@ -248,6 +248,40 @@ int64_t Cnt(int64_t num) {
   }
   return f(0, 0, 1, 0)[1];
 }
+
+--> find digit sum upto n, this is optimized version, use memset just once
+string s;
+int64_t dp[20][2][2];
+int64_t cnt[20][2][2];
+pair<int64_t, int64_t> f(int i, int tight, int started) {
+  if (i < 0) return {0, started ? 1 : 0}; // {sum, count of valid numbers}
+  if (~dp[i][tight][started] && !tight) return {dp[i][tight][started], cnt[i][tight][started]};
+  int64_t totalSum = 0, totalCount = 0;
+  int limit = tight ? (s[i] - '0') : 9;
+  for (int d = 0; d <= limit; d++) {
+    int newTight = tight && (d == limit);
+    int newStarted = started || (d > 0);
+    auto [nextSum, nextCount] = f(i - 1, newTight, newStarted);
+    if (newStarted) {
+      totalSum += d * nextCount + nextSum;
+      totalCount += nextCount;
+    } else {
+      totalSum += nextSum;
+      totalCount += nextCount;
+    }
+  }
+  dp[i][tight][started] = totalSum;
+  cnt[i][tight][started] = totalCount;
+  return {totalSum, totalCount};
+}
+int64_t sumOfAllDigits(int64_t num) {
+  if (num < 0) return 0;
+  s = to_string(num);
+  reverse(s.begin(), s.end());
+  return f(s.size() - 1, 1, 0).first;
+}
+memset(dp, -1, sizeof dp);
+memset(cnt, -1, sizeof cnt);
 
 // Optimized versions -->
 
