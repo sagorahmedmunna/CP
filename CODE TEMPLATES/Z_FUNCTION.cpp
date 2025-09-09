@@ -1,7 +1,10 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// 0 based
+// 0 based, longest substring lenght starting at position i that is also a prefix
+// String: a b c a b c b b
+// Index:  0 1 2 3 4 5 6 7
+// Z[]:    - 0 0 3 0 0 0 0
 vector<int> get_z(string& s) {
   int n = s.size(), l = 0, r = 0;
   vector<int> z(n);

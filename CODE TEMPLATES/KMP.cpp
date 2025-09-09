@@ -1,3 +1,7 @@
+// length of longest proper prefix of P[0...i] that is also a suffix of P[0...i]
+// Pattern: a b a b a c a
+// Index:   0 1 2 3 4 5 6
+// LPS[]:   0 0 1 2 3 0 1
 vector<int> get_pi(string& s) {
   int n = s.size();
   vector<int> pi(n);
@@ -8,7 +12,6 @@ vector<int> get_pi(string& s) {
   }
   return pi;
 }
-
 // count the number of p occurs in s
 string s, p;
 s = p + "#" + s;
