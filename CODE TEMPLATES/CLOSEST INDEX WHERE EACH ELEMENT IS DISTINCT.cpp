@@ -1,6 +1,6 @@
 // 0 based
-// count of distinct element from index i to left and right
-array<vector<int>, 2> distinctElementFromI(vector<int>& a) {
+// closest index where each element is distinct
+array<vector<int>, 2> closestDistinctElementIndex(vector<int>& a) {
   int n = a.size(), mxIdx = -1;
   map<int, int> mp;
   vector<int> l(n);
