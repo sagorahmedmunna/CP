@@ -57,9 +57,8 @@ struct DFS {
     }
     return parent[u][0];
   }
-  int dis(int u, int v) {
+  int dis(int u, int v)
     return depth[u] + depth[v] - 2 * depth[lca(u, v)];
-  }
 };
 
 int main() {
