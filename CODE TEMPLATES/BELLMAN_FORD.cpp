@@ -39,7 +39,7 @@ int32_t main() {
   }
   return 0;
 }
-// ## Bellman-ford
+// ## Bellman-ford (V * E)
 vector<int> bellman_ford(int s){
   vector<int> dis(n, I);
   dis[s]=0;
