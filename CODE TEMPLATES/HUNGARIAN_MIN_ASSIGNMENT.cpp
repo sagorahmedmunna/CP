@@ -1,5 +1,5 @@
 // returns the max sum and permuation
-// for minimum, convert each value to negative.
+// for minimum, convert each value to negative
 template<typename T>
 pair<T, vector<int> > hungarian(const vector<vector<T> > &a) {
 	if (a.empty()) return {0, {}};
