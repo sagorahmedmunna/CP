@@ -95,14 +95,10 @@ struct HeavyLightDecomposition {
   int PathQuery(int a, int b) {
     int res = neutral;
     for (; head[a] != head[b]; b = parent[head[b]]) {
-      if (depth[head[a]] > depth[head[b]]) {
-        swap(a, b);
-      }
+      if (depth[head[a]] > depth[head[b]]) swap(a, b);
       res = Merge(res, sg.Query(tin[head[b]], tin[b]));
     }
-    if (depth[a] > depth[b]) {
-      swap(a, b);
-    }
+    if (depth[a] > depth[b]) swap(a, b);
     res = Merge(res, sg.Query(tin[a], tin[b]));
     return res;
   }
