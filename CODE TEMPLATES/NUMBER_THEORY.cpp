@@ -83,6 +83,27 @@ struct Combinatorics {
   }
 } comb(N);
 
+// Pascal's Triangle -> 0 based
+// 0)	           1	   
+// 1)	         1   1	   
+// 2)	       1   2   1	   
+// 3)	     1   3   3   1	   
+// 4)	   1   4   6   4   1	  
+// 5)  1   5   10  10  5   1  
+int PascalsTriangle(int r, int c) {
+  return comb.nCr(r, c);
+}
+// 0)	           1	   
+// 1)	         1   1	   
+// 2)	       1   2   [1]	   
+// 3)	     1   3   [3]   1	   
+// 4)	   1   4   [6]   4   1	  
+// 5)  1   5   10  (10)  5   1  
+// sum of (0Cr, 1Cr, 2Cr, 3Cr, 4Cr) -> 5C(r + 1)
+int HockeyStickIdentity(int n, int r) {
+  return comb.nC2(n + 1, r + 1);
+}
+
 // phi of single integer
 int n = 10;
 long long num = n;
