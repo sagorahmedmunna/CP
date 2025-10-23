@@ -101,7 +101,7 @@ int PascalsTriangle(int r, int c) {
 // 5)  1   5   10  (10)  5   1  
 // sum of (0Cr, 1Cr, 2Cr, 3Cr, 4Cr) -> 5C(r + 1)
 int HockeyStickIdentity(int n, int r) {
-  return comb.nC2(n + 1, r + 1);
+  return comb.nCr(n + 1, r + 1);
 }
 
 // phi of single integer
