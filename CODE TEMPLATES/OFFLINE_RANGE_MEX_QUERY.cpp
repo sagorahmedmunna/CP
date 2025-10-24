@@ -21,7 +21,7 @@ struct SegmentTree {
     return u - n;
   }
 };
-// update last occurence of each value with index of array
+// update last occurence of each value with index of array 
 // find the lowest segmentree index which is less then current range "L"
 const int N = 2e5 + 9;
 vector<array<int, 2>> queries[N];
