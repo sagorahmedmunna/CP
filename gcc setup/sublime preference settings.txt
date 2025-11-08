@@ -1,0 +1,23 @@
+{
+  "font_size": 14,
+  "translate_tabs_to_spaces": false,
+  "tab_size": 2,
+  "save_on_focus_lost": true,
+  "trim_trailing_white_space_on_save": true,
+  "draw_white_space": "selection",
+  "highlight_line": true,
+  "word_wrap": false,
+  "line_numbers": true,
+  "rulers": [100],
+  "scroll_past_end": true,
+  "show_encoding": true,
+  "show_line_endings": true,
+  "auto_complete": true,
+  "auto_indent": true,
+  "detect_indentation": true,
+  "ensure_newline_at_eof_on_save": true,
+  "theme": "Adaptive.sublime-theme",
+  "color_scheme": "Mariana.sublime-color-scheme",
+  "caret_style": "solid",
+  "ignored_packages": ["Vintage"]
+}
