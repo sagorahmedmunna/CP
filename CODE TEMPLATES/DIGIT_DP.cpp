@@ -1,6 +1,45 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// optimized - final
+// count of 11, from 0 to n
+// first reverse the string, then cal f(s.size() - 1, 0, 10, 1)
+// memset only once
+int64_t dp[32][32][3];
+int64_t f(int i, int cnt, int last, int tight) {
+  if (i < 0) return cnt;
+  auto ret = dp[i][cnt][last];
+  if (~ret && !tight) return ret;
+  ret = 0;
+  int limit = tight ? (s[i] - '0') : 1;
+  for (int d = 0; d <= limit; d++) {
+    int nTight = tight && (d == limit);
+    int nCnt = cnt + (last == d && d == 1);
+    ret += f(i - 1, nCnt, d, nTight);
+  }
+  if (!tight) dp[i][cnt][last] = ret;
+  return ret;
+}
+// handle case of '0' -> no two adjacent digits are the same.
+// int nLast = (last == 10 && d == 0) ? 10 : d;
+// or use started state for keep track that if number has started
+int64_t dp[20][11];
+int64_t f(int i, int last, int tight) {
+  if (i < 0) return 1;
+  auto ret = dp[i][last];
+  if (~ret && !tight) return ret;
+  ret = 0;
+  int limit = tight ? s[i] - '0' : 9;
+  for (int d = 0; d <= limit; d++) {
+    if (d == last) continue;
+    int nTight = tight && (d == limit);
+    int nLast = (last == 10 && d == 0) ? 10 : d;
+    ret += f(i - 1, nLast, nTight);
+  }
+  if (!tight) dp[i][last] = ret;
+  return ret;
+}
+
 //-> for case of 0 use 'started' state
 
 string s;
