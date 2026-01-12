@@ -1,9 +1,7 @@
 const double PI = acos((double)-1.0);
 using ld = long double;
 using ll = long long;
-
 struct point { ld x, y; };
-
 void manhattanToChebychev(int& x, int& y) {
   int X = x + y, Y = x - y;
   x = X, y = Y;
@@ -15,6 +13,11 @@ void chebyshevToManhattan(int& x, int& y) {
 ll manhattanDistance(point& p1, point& p2) {
   return abs(p1.x - p2.x) + abs(p1.y - p2.y);
 }
+/*
+  Calculates the minimum time to move between two points
+  when diagonal movement is allowed.
+  This uses Chebyshev distance.
+*/
 ll chebyshevDistance(point& p1, point& p2) {
   return max(abs(p1.x - p2.x), abs(p1.y - p2.y));
 }
@@ -49,11 +52,9 @@ ld distance(point& p1, point& p2) {
 bool isInside(int x1, int y1, int x2, int y2, int r) {
   return ((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1)) <= r * r;
 }
-
 ld toDegrees(ld radians) {
   return radians * (180.0 / PI);
 }
-
 // circle with radius r
 struct Circle {
   ld r;
@@ -77,7 +78,6 @@ struct Circle {
   ld Cone_Volume(ld h) { return (1.0 / 3.0) * PI * r * r * h; }
   ld Annulus_Area(ld R) { return PI * (r * r - R * R); }
 };
-
 // triangle with three sides: a, b, c
 struct Triangle {
   ld a, b, c, s;
@@ -111,7 +111,6 @@ struct Triangle {
   ld Median_B() { return sqrt((2 * a * a + 2 * c * c - b * b) / 4); }
   ld Median_C() { return sqrt((2 * a * a + 2 * b * b - c * c) / 4); }
 };
-
 // n sided polygon (n-gon) with side length a
 struct Polygon {
   int n;
