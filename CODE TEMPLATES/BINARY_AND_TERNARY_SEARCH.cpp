@@ -5,7 +5,12 @@ while (lo <= hi) {
   if (f(mid)) hi = mid - 1;
   else lo = mid + 1;
 }
-
+// -> another version
+while (lo < hi) {
+  int mid = (lo + hi) / 2;
+  if (f(mid)) hi = mid;
+  else lo = mid + 1;
+}
 //Binary Search (double)
 double lo = 0, hi = inf;
 int itr = 50;
@@ -14,7 +19,6 @@ while (itr--) {
   if (f(mid)) hi = mid;
   else lo = mid;
 }
-
 //Ternary Search (integer, max)
 int lo = 0, hi = n - 1;
 while (lo < hi) {
@@ -24,7 +28,6 @@ while (lo < hi) {
   if (f(mid) < f(mid + 1)) lo = mid + 1;
   else  hi = mid;
 }
-
 //Ternary Search (double, max)
 double lo = 0, hi = inf;
 int itr = 50;
