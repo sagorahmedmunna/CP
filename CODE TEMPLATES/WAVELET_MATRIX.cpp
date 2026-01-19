@@ -13,14 +13,18 @@ struct bitVec {
 };
 struct WaveletMatrix {
   int n; vector<bitVec> bv;
-  WaveletMatrix(vector<int64_t> a, int64_t max_val): n((int)(a).size()), bv(1 + __lg(max_val), {{}}) {
+  vector<vector<int64_t>> pref;
+  WaveletMatrix(vector<int64_t> a, int64_t max_val): n((int)(a).size()), bv(1 + __lg(max_val), {{}}), pref(1 + __lg(max_val)) {
     vector<int64_t> nxt(n);
     for (int h = (int)(bv).size(); h--;) {
       vector<bool> b(n);
       for (int i = 0; i < n; ++i) b[i] = ((a[i] >> h) & 1);
       bv[h] = b;
-      array it{begin(nxt), begin(nxt) + bv[h].cnt0(n)};
+      int cnt0 = bv[h].cnt0(n);
+      array it{begin(nxt), begin(nxt) + cnt0};
       for (int i = 0; i < n; ++i) *it[b[i]]++ = a[i];
+      pref[h].resize(n + 1), pref[h][0] = 0;
+      for (int i = 0; i < n; ++i) pref[h][i + 1] = pref[h][i] + nxt[i];
       swap(a, nxt);
     }
   }
@@ -55,6 +59,26 @@ struct WaveletMatrix {
   int rangeFreq(int l, int r, int64_t lower, int64_t upper) {
     if (lower > upper) swap(lower, upper);
     return rangeFreq(l, r, upper) - rangeFreq(l, r, lower);
+  }
+  // sum of v[i] s.t. (l <= i < r) && (v[i] <= k)
+  int64_t sumLTE(int l, int r, int64_t k) {
+    int64_t res = 0;
+    for (int h = (int)(bv).size(); h--;) {
+      int l0 = bv[h].cnt0(l), r0 = bv[h].cnt0(r);
+      if ((k >> h) & 1) {
+        res += pref[h][r0] - pref[h][l0];
+        l += bv[h].cnt0(n) - l0;
+        r += bv[h].cnt0(n) - r0;
+      } else {
+        l = l0, r = r0;
+      }
+    }
+    if (l < r) res += pref[0][r] - pref[0][l];
+    return res;
+  }
+  // sum of v[i] s.t. (l <= i < r) && (lower <= v[i] <= upper)
+  int64_t sumBetween(int l, int r, int64_t lower, int64_t upper) {
+    return sumLTE(l, r, upper) - sumLTE(l, r, lower - 1);
   }
   // max v[i] s.t. (l <= i < r) && (v[i] < upper)
   int64_t prevValue(int l, int r, int64_t upper) {
